@@ -1,13 +1,15 @@
 # Fujitsu-backend
 
----
 Navigation
+- [Introduction](#introduction)
+- [Fast start](#fast-start)
 - [Changelogs](docs/CHANGELOG.md)
 - [Project visualization](docs/VISUALIZATION.md)
 - [Project workflow](docs/WORKFLOW.md)
+- [Authors](#authors)
+- [License](#license)
 
 
----
 # Introduction
 
 ## Note
