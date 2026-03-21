@@ -16,7 +16,7 @@ Navigation
 This is a Practice-driven project and this doesn't stay as MVP or Production-ready.
 
 ## Project description
-Provide REST API backend for Fujitsu 
+Provide REST API backend for Fujitsu food delivery application
 
 ## Task
 The objective of the task is to develop a sub-functionality of the food delivery application, which
