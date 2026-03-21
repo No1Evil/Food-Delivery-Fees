@@ -1,8 +1,10 @@
 package global.fujitsu.api.model.region;
 
-public record WmoCode(String value) {
+import lombok.NonNull;
+
+public record WmoCode(@NonNull String value) {
     public WmoCode{
-        if (value == null || value.isEmpty()){
+        if (value.isEmpty()){
             throw new IllegalArgumentException("WMO Code value cannot be empty");
         }
     }
