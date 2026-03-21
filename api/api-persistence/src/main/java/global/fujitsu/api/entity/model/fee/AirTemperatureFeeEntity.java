@@ -5,7 +5,7 @@ import lombok.NonNull;
 import java.math.BigDecimal;
 
 public record AirTemperatureFeeEntity(
-    Long id,
+    @NonNull Long id,
     @NonNull BigDecimal minTemperature,
     @NonNull BigDecimal maxTemperature,
     @NonNull BigDecimal fee

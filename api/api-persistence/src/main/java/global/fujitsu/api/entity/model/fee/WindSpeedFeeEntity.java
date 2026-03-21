@@ -6,7 +6,7 @@ import lombok.NonNull;
 import java.math.BigDecimal;
 
 public record WindSpeedFeeEntity(
-    Long id,
+    @NonNull Long id,
     @NonNull VehicleType vehicleType,
     @NonNull BigDecimal minWindSpeed,
     @NonNull BigDecimal maxWindSpeed

@@ -5,7 +5,7 @@ import global.fujitsu.api.model.vehicle.VehicleType;
 import lombok.NonNull;
 
 public record VehicleTypeEntity(
-    Long id,
+    @NonNull Long id,
     @NonNull VehicleType vehicleType
 ) implements EntityModel {
 }

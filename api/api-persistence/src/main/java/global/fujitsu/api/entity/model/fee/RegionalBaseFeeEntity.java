@@ -7,7 +7,7 @@ import lombok.NonNull;
 import java.math.BigDecimal;
 
 public record RegionalBaseFeeEntity(
-    Long id,
+    @NonNull Long id,
     @NonNull RegionName regionName,
     @NonNull VehicleType vehicleType,
     @NonNull BigDecimal fee
