@@ -5,6 +5,7 @@ import global.fujitsu.api.model.region.RegionName;
 import lombok.NonNull;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 
 /** @param weatherPhenomenon weather type */
 public record Measurement(
@@ -12,7 +13,8 @@ public record Measurement(
     @NonNull BigDecimal temperature,
     @NonNull BigDecimal windSpeed,
     // Maybe replace with WeatherType || PhenomenonType
-    @NonNull String weatherPhenomenon
+    @NonNull String weatherPhenomenon,
+    @NonNull Instant measuredAt
 ) implements EntityModel {
 
     public Measurement{
