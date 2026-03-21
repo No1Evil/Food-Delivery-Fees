@@ -1,6 +1,8 @@
 # Changelog
 
-
+---
+## [Unreleased] - 22.03.2026
+- Changed entity relation model visualization
 
 ---
 ## [Unreleased] - 21.03.2026
