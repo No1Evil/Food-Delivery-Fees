@@ -8,7 +8,8 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 /** @param weatherPhenomenon weather type */
-public record Measurement(
+public record MeasurementEntity(
+    @NonNull Long id,
     @NonNull RegionName regionName,
     @NonNull BigDecimal temperature,
     @NonNull BigDecimal windSpeed,
@@ -17,7 +18,7 @@ public record Measurement(
     @NonNull Instant measuredAt
 ) implements EntityModel {
 
-    public Measurement{
+    public MeasurementEntity {
         if (weatherPhenomenon.isBlank()){
             throw new IllegalArgumentException("Weather phenomenon cannot be empty");
         }

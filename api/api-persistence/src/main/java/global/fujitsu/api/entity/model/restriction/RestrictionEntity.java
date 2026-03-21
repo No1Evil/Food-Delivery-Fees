@@ -6,14 +6,15 @@ import lombok.NonNull;
 
 import java.math.BigDecimal;
 
-public record Restriction(
+public record RestrictionEntity(
+    @NonNull Long id,
     @NonNull VehicleType vehicleType,
     @NonNull String paramName,
     @NonNull BigDecimal minValue,
     @NonNull BigDecimal maxValue
 ) implements EntityModel {
 
-    public Restriction{
+    public RestrictionEntity {
 
         if (paramName.isBlank()) {
             throw new IllegalArgumentException("Param name cannot be empty");
