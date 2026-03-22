@@ -1,5 +1,6 @@
-package global.fujitsu.api.model.dto.request;
+package global.fujitsu.api.model.dto.request.get;
 
+import global.fujitsu.api.model.dto.request.base.Request;
 import global.fujitsu.api.model.region.RegionName;
 import global.fujitsu.api.model.vehicle.VehicleType;
 import lombok.NonNull;
