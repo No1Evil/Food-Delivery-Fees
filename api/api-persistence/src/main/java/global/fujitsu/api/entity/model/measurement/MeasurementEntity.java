@@ -11,9 +11,8 @@ import java.time.Instant;
 /** @param weatherPhenomenon weather type */
 public record MeasurementEntity(
     @Nullable Long id,
-    @NonNull RegionName regionName,
-    @NonNull BigDecimal temperature,
     @NonNull Long regionId,
+    @NonNull BigDecimal airTemperature,
     @NonNull BigDecimal windSpeed,
     // Maybe replace with WeatherType || PhenomenonType
     @NonNull String weatherPhenomenon,
