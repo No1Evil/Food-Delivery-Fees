@@ -32,7 +32,7 @@ public class TotalFeeServiceImpl implements TotalFeeService {
 
         var vehicleType = request.vehicleType();
 
-        var airTemperatureFee = airTemperatureFeeService.getFee(measurement.temperature()).fee();
+        var airTemperatureFee = airTemperatureFeeService.getFee(measurement.airTemperature()).fee();
         var weatherPhenomenonFee = weatherPhenomenonFeeService.getFee(vehicleType, measurement.weatherPhenomenon()).fee();
         var windSpeedFee = windSpeedFeeService.getFee(vehicleType, measurement.windSpeed()).fee();
 
