@@ -7,5 +7,5 @@ import lombok.NonNull;
 import java.util.Optional;
 
 public interface VehicleTypeRepository extends Repository<VehicleTypeEntity> {
-    Optional<VehicleTypeEntity> findByName(@NonNull String name);
+    Optional<VehicleTypeEntity> findByTypeName(@NonNull String name);
 }
