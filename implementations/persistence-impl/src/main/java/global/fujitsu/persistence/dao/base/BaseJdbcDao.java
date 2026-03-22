@@ -1,14 +1,13 @@
 package global.fujitsu.persistence.dao.base;
 
 import global.fujitsu.api.entity.model.EntityModel;
-import global.fujitsu.api.repository.Repository;
+import global.fujitsu.api.repository.base.Repository;
 import global.fujitsu.persistence.util.SqlConstants;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import java.io.IOException;
