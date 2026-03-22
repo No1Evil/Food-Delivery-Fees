@@ -1,4 +1,4 @@
-package global.fujitsu.domain.service;
+package global.fujitsu.domain.service.fee;
 
 import global.fujitsu.api.domain.exceptions.FeeNotFoundException;
 import global.fujitsu.api.domain.exceptions.RestrictedConditionException;
