@@ -7,6 +7,6 @@ import lombok.NonNull;
 
 import java.util.Optional;
 
-public non-sealed interface WeatherPhenomenonFeeRepository extends FeeRepository<WeatherPhenomenonFeeEntity> {
+public interface WeatherPhenomenonFeeRepository extends FeeRepository<WeatherPhenomenonFeeEntity> {
     Optional<FeeResult> findBaseFee(@NonNull VehicleType vehicleType, @NonNull String weatherPhenomenon);
 }
