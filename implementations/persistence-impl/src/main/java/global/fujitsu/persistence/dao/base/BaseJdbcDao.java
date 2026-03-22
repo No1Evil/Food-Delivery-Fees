@@ -1,4 +1,4 @@
-package global.fujitsu.persistence.dao;
+package global.fujitsu.persistence.dao.base;
 
 import global.fujitsu.api.entity.model.EntityModel;
 import global.fujitsu.api.repository.Repository;
