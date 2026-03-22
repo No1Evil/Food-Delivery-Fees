@@ -1,4 +1,4 @@
-package global.fujitsu.api.repository;
+package global.fujitsu.api.repository.base;
 
 import global.fujitsu.api.entity.model.EntityModel;
 import lombok.NonNull;
