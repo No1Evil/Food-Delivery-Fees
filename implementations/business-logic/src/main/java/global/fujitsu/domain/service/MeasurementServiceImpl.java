@@ -3,6 +3,7 @@ package global.fujitsu.domain.service;
 import global.fujitsu.api.domain.exceptions.EntityNotFoundException;
 import global.fujitsu.api.domain.service.MeasurementService;
 import global.fujitsu.api.model.dto.request.create.CreateMeasurementRequest;
+import global.fujitsu.api.model.dto.request.get.GetMeasurementRequest;
 import global.fujitsu.api.model.dto.response.get.MeasurementResponse;
 import global.fujitsu.api.repository.measurement.MeasurementRepository;
 import global.fujitsu.domain.mapper.impl.MeasurementMapper;
@@ -41,5 +42,14 @@ public class MeasurementServiceImpl implements MeasurementService {
     @Override
     public List<MeasurementResponse> findAll() {
         return repository.findAll().stream().map(mapper::toResponse).toList();
+    }
+
+    @Override
+    public MeasurementResponse find(GetMeasurementRequest request) {
+        var entity = repository.find(request)
+            .orElseThrow(() -> new EntityNotFoundException(
+                "Measurement not found for region {} and timestamp {}", request.regionId(), request.timestamp()
+            ));
+        return mapper.toResponse(entity);
     }
 }
