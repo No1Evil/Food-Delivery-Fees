@@ -8,7 +8,7 @@ import global.fujitsu.domain.mapper.ResponseMapper;
 
 import java.util.Objects;
 
-public class RegionalBasedFeeMapper
+public final class RegionalBasedFeeMapper
     implements ResponseMapper<RegionalBasedFeeEntity, RegionalBasedFeeResponse>,
     RequestMapper<RegionalBasedFeeEntity, CreateRegionalBasedFeeRequest> {
 
