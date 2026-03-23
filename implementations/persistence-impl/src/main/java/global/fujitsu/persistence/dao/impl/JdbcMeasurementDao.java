@@ -1,7 +1,7 @@
 package global.fujitsu.persistence.dao.impl;
 
 import global.fujitsu.api.entity.model.measurement.MeasurementEntity;
-import global.fujitsu.api.model.region.RegionName;
+import global.fujitsu.api.model.dto.request.get.GetMeasurementRequest;
 import global.fujitsu.api.repository.measurement.MeasurementRepository;
 import global.fujitsu.persistence.dao.base.BaseJdbcDao;
 import jakarta.annotation.PostConstruct;
@@ -44,15 +44,6 @@ public final class JdbcMeasurementDao
     }
 
     @Override
-    public Optional<MeasurementEntity> findLatest(RegionName regionName, Instant timestamp) {
-        System.out.println(FIND_LATEST_QUERY);
-        return  jdbcTemplate.query(FIND_LATEST_QUERY, mapper,
-            regionName.value(),
-            Timestamp.from(timestamp)
-        ).stream().findFirst();
-    }
-
-    @Override
     protected PreparedStatement prepareSaveStatement(PreparedStatement preparedStatement, MeasurementEntity entity) throws SQLException {
         preparedStatement.setLong(1, entity.regionId());
         preparedStatement.setBigDecimal(2, entity.airTemperature());
@@ -60,5 +51,14 @@ public final class JdbcMeasurementDao
         preparedStatement.setString(4, entity.weatherPhenomenon());
         preparedStatement.setTimestamp(5, Timestamp.from(entity.measuredAt()));
         return preparedStatement;
+    }
+
+    @Override
+    public Optional<MeasurementEntity> find(@NonNull GetMeasurementRequest request) {
+        var timestamp = request.timestamp() == null ?
+            Timestamp.from(Instant.now()) : Timestamp.from(request.timestamp());
+
+        return jdbcTemplate.query(FIND_LATEST_QUERY, mapper, request.regionId(), timestamp)
+            .stream().findFirst();
     }
 }
