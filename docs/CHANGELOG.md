@@ -2,10 +2,59 @@
 
 ---
 ## [Unreleased] - 22.03.2026 - 23.03.2026
-- 
-- Implemented GetFeeRequests and response for them is FeeResult.
+- Done a lot of work on DRY principle, made sure
+that there is no overloaded DRY so that the system stays modular.
+- Implemented DTO objects:
+  - Request
+    - Fees related
+      - CreateAirTemperatureFee
+      - CreateRegionalBasedFee
+      - CreateWeatherPhenomenonFee
+      - CreateWindSpeedFee
+      - GetAirTemperatureFee
+      - GetRegionalBasedFee
+      - GetWeatherPhenomenonFee
+      - GetWindSpeedFee
+      - GetTotalFee
+    - Objects related:
+      - CreateVehicleType
+      - CreateRegion
+      - CreateMeasurement
+      - GetMeasurement
+  - Response
+    - Fees related
+      - AirTemperatureFee
+      - RegionalBasedFee
+      - WeatherPhenomenonFee
+      - WindSpeedFee
+      - TotalFee
+    - Objects related
+      - VehicleType
+      - Region
+      - Measurement
+- Implemented services:
+  - Fee related:
+    - AirTemperatureFeeService
+    - RegionalBasedFeeService
+    - TotalFeeService
+    - WeatherPhenomenonFeeService
+    - WindSpeedFeeService
+  - Base entities related:
+    - MeasurementService
+    - RegionService
+    - VehicleTypeService
+- Implemented DAO (Using JDBC):
+  - Fee related
+    - JdbcAirTemperatureFee
+    - JdbcRegionalBasedFee
+    - JdbcWeatherPhenomenonFee
+    - JdbcWindSpeedFee
+  - Base entities related:
+    - JdbcMeasurement
+    - JdbcRegion
+    - JdbcVehicleType
 - Implement BaseFeeService with returning FeeResult method getBaseFee(request) to prevent DRY.
-- Implemented schema.sql and some scripts for finding fees.
+- Implemented schema.sql scripts for finding fees.
 - Implemented some Dao objects, mappers for requests to entity and reversed.
 - Implemented SqlConstants to simplify writing basic scripts.
 - Implementation of persistence-api in persistence-impl.
@@ -16,6 +65,15 @@
 - Removed unnecessary sealed parameter in interface. (thought that'd be cool)
 - Some RegionalBasedFee classes had names RegionalBaseFee.
 - Changed entity relation model visualization.
+
+## Plans
+- Create DTO for weatherPhenomenon instead of raw string
+- Create DTO for all Entity ids
+- Rename fields in WindSpeedFee... to *_speed instead of *_wind_speed
+- **Tests for persistence-impl and business-logic**
+- Implement OpenAPI Swagger into rest-app
+- REST API Controller application implementation
+- Docker
 
 ---
 ## [Unreleased] - 21.03.2026
