@@ -9,9 +9,8 @@ import java.math.BigDecimal;
 
 public record RegionalBasedFeeResponse(
     @NonNull Long id,
-    @NonNull RegionName regionName,
-    @NonNull VehicleType vehicleType,
     @NonNull Long regionId,
+    @NonNull Long vehicleTypeId,
     @NonNull BigDecimal fee,
     @NonNull Boolean isPermitted
 ) implements GetResponse {
