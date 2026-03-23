@@ -1,11 +1,8 @@
 package global.fujitsu.persistence.dao.impl.fee;
 
-import global.fujitsu.api.entity.model.EntityModel;
 import global.fujitsu.api.entity.model.fee.WeatherPhenomenonFeeEntity;
-import global.fujitsu.api.model.dto.request.base.GetFeeRequest;
 import global.fujitsu.api.model.dto.request.get.GetWeatherPhenomenonFeeRequest;
 import global.fujitsu.api.model.fee.FeeResult;
-import global.fujitsu.api.model.vehicle.VehicleType;
 import global.fujitsu.api.repository.fee.WeatherPhenomenonFeeRepository;
 import global.fujitsu.persistence.dao.base.BaseJdbcFeeBasedDao;
 import lombok.NonNull;

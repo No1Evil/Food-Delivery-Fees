@@ -3,7 +3,6 @@ package global.fujitsu.persistence.dao.impl.fee;
 import global.fujitsu.api.entity.model.fee.WindSpeedFeeEntity;
 import global.fujitsu.api.model.dto.request.get.GetWindSpeedFeeRequest;
 import global.fujitsu.api.model.fee.FeeResult;
-import global.fujitsu.api.model.vehicle.VehicleType;
 import global.fujitsu.api.repository.fee.WindSpeedFeeRepository;
 import global.fujitsu.persistence.dao.base.BaseJdbcFeeBasedDao;
 import lombok.NonNull;
@@ -13,7 +12,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;

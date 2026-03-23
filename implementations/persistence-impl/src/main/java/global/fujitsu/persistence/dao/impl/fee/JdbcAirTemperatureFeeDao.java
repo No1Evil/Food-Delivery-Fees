@@ -1,6 +1,5 @@
 package global.fujitsu.persistence.dao.impl.fee;
 
-import global.fujitsu.api.entity.model.EntityModel;
 import global.fujitsu.api.entity.model.fee.AirTemperatureFeeEntity;
 import global.fujitsu.api.model.dto.request.get.GetAirTemperatureFeeRequest;
 import global.fujitsu.api.model.fee.FeeResult;
