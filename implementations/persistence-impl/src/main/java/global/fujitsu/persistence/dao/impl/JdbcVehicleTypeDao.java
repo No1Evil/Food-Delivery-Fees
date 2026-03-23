@@ -2,15 +2,12 @@ package global.fujitsu.persistence.dao.impl;
 
 import global.fujitsu.api.entity.model.vehicle.VehicleTypeEntity;
 import global.fujitsu.api.repository.vehicle.VehicleTypeRepository;
-import global.fujitsu.persistence.dao.BaseJdbcDao;
+import global.fujitsu.persistence.dao.base.BaseJdbcDao;
 import global.fujitsu.persistence.util.SqlConstants;
-import jakarta.annotation.PostConstruct;
 import lombok.NonNull;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
