@@ -21,7 +21,7 @@ public final class JdbcVehicleTypeDao
     public JdbcVehicleTypeDao(@NonNull JdbcTemplate jdbcTemplate) {
         super(jdbcTemplate,
             "vehicle_types",
-            List.of("id", "type"),
+            List.of("type"),
             VehicleTypeEntity.class
         );
     }
