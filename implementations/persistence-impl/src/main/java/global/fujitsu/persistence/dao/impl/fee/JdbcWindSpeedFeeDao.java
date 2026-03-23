@@ -18,22 +18,23 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public final class JdbcWindSpeedFeeDao
+public class JdbcWindSpeedFeeDao
     extends BaseJdbcFeeBasedDao<WindSpeedFeeEntity, GetWindSpeedFeeRequest>
     implements WindSpeedFeeRepository {
 
-    @Value("classpath:sql/scripts/find_wind_speed_fee.sql")
-    private Resource findWindSpeedFeeScript;
     private final String FIND_WIND_SPEED_FEE_QUERY;
 
-    public JdbcWindSpeedFeeDao(@NonNull JdbcTemplate jdbcTemplate) throws IOException {
+    public JdbcWindSpeedFeeDao(
+        @NonNull JdbcTemplate jdbcTemplate,
+        @Value("classpath:sql/scripts/find_wind_speed_fee.sql") Resource script
+    ) throws IOException {
         super(
             jdbcTemplate,
             "wind_speed_fees",
             List.of("vehicle_type_id", "min_wind_speed", "max_wind_speed"),
             WindSpeedFeeEntity.class
         );
-        this.FIND_WIND_SPEED_FEE_QUERY = loadScript(findWindSpeedFeeScript);
+        this.FIND_WIND_SPEED_FEE_QUERY = loadScript(script);
     }
 
     @Override

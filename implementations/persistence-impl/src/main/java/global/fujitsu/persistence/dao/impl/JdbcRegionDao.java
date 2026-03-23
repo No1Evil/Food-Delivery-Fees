@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public final class JdbcRegionDao
+public class JdbcRegionDao
     extends BaseJdbcDao<RegionEntity>
     implements RegionRepository {
 

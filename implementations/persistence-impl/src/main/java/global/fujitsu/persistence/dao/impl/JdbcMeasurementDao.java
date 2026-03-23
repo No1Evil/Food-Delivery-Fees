@@ -20,27 +20,23 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public final class JdbcMeasurementDao
+public class JdbcMeasurementDao
     extends BaseJdbcDao<MeasurementEntity>
     implements MeasurementRepository {
 
-    @Value("classpath:sql/scripts/find_latest_measurement_by_region_name.sql")
-    private Resource findLatestScript;
-
-    @PostConstruct
-    public void init() throws IOException {
-        FIND_LATEST_QUERY = BaseJdbcDao.loadScript(findLatestScript);
-    }
-
     private static String FIND_LATEST_QUERY;
 
-    public JdbcMeasurementDao(@NonNull JdbcTemplate jdbcTemplate) {
+    public JdbcMeasurementDao(
+        @NonNull JdbcTemplate jdbcTemplate,
+        @Value("classpath:sql/scripts/find_latest_measurement_by_region_name.sql") Resource script
+    ) throws IOException {
         super(
             jdbcTemplate,
             "measurements",
             List.of("region_id", "air_temperature", "wind_speed", "weather_phenomenon", "measured_at"),
             MeasurementEntity.class
         );
+        FIND_LATEST_QUERY = loadScript(script);
     }
 
     @Override

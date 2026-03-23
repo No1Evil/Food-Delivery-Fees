@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public final class JdbcVehicleTypeDao
+public class JdbcVehicleTypeDao
     extends BaseJdbcDao<VehicleTypeEntity>
     implements VehicleTypeRepository {
 

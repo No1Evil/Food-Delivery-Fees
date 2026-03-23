@@ -18,22 +18,23 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public final class JdbcWeatherPhenomenonFeeDao
+public class JdbcWeatherPhenomenonFeeDao
     extends BaseJdbcFeeBasedDao<WeatherPhenomenonFeeEntity, GetWeatherPhenomenonFeeRequest>
     implements WeatherPhenomenonFeeRepository {
 
-    @Value("classpath:sql/scripts/find_weather_phenomenon_fee.sql")
-    private Resource findWeatherPhenomenonFeeScript;
     private final String FIND_WEATHER_PHENOMENON_FEE_QUERY;
 
-    public JdbcWeatherPhenomenonFeeDao(@NonNull JdbcTemplate jdbcTemplate) throws IOException {
+    public JdbcWeatherPhenomenonFeeDao(
+        @NonNull JdbcTemplate jdbcTemplate,
+        @Value("classpath:sql/scripts/find_weather_phenomenon_fee.sql") Resource script
+    ) throws IOException {
         super(
             jdbcTemplate,
             "weather_phenomenon_fees",
             List.of("vehicle_type_id", "weather_phenomenon"),
             WeatherPhenomenonFeeEntity.class
         );
-        this.FIND_WEATHER_PHENOMENON_FEE_QUERY = loadScript(findWeatherPhenomenonFeeScript);
+        this.FIND_WEATHER_PHENOMENON_FEE_QUERY = loadScript(script);
     }
 
     @Override

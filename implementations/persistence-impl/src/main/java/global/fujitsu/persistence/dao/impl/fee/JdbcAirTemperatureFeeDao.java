@@ -18,22 +18,23 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public final class JdbcAirTemperatureFeeDao
+public class JdbcAirTemperatureFeeDao
     extends BaseJdbcFeeBasedDao<AirTemperatureFeeEntity, GetAirTemperatureFeeRequest>
     implements AirTemperatureFeeRepository {
 
-    @Value("classpath:sql/scripts/find_air_temperature_fee.sql")
-    private Resource findAirTemperatureFeeScript;
     private final String FIND_AIR_TEMPERATURE_FEE_QUERY;
 
-    public JdbcAirTemperatureFeeDao(@NonNull JdbcTemplate jdbcTemplate) throws IOException {
+    public JdbcAirTemperatureFeeDao(
+        @NonNull JdbcTemplate jdbcTemplate,
+        @Value("classpath:sql/scripts/find_air_temperature_fee.sql") Resource script
+    ) throws IOException {
         super(
             jdbcTemplate,
             "air_temperature_fees",
             List.of("min_temperature", "max_temperature"),
             AirTemperatureFeeEntity.class
         );
-        this.FIND_AIR_TEMPERATURE_FEE_QUERY = loadScript(findAirTemperatureFeeScript);
+        this.FIND_AIR_TEMPERATURE_FEE_QUERY = loadScript(script);
     }
 
     @Override

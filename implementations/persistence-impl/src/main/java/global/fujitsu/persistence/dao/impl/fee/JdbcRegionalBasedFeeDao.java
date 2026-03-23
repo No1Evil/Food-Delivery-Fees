@@ -18,22 +18,23 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public final class JdbcRegionalBasedFeeDao
+public class JdbcRegionalBasedFeeDao
     extends BaseJdbcFeeBasedDao<RegionalBasedFeeEntity, GetRegionalBasedFeeRequest>
     implements RegionalBasedFeeRepository {
 
-    @Value("classpath:sql/scripts/find_regional_based_fee.sql")
-    private Resource findRegionalBasedFeeScript;
     private final String FIND_REGIONAL_BASED_FEE_QUERY;
 
-    public JdbcRegionalBasedFeeDao(@NonNull JdbcTemplate jdbcTemplate) throws IOException {
+    public JdbcRegionalBasedFeeDao(
+        @NonNull JdbcTemplate jdbcTemplate,
+        @Value("classpath:sql/scripts/find_regional_based_fee.sql") Resource script
+    ) throws IOException {
         super(
             jdbcTemplate,
             "regional_based_fees",
             List.of("region_id", "vehicle_type_id"),
             RegionalBasedFeeEntity.class
         );
-        this.FIND_REGIONAL_BASED_FEE_QUERY = loadScript(findRegionalBasedFeeScript);
+        this.FIND_REGIONAL_BASED_FEE_QUERY = loadScript(script);
     }
 
     @Override
