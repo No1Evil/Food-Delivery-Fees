@@ -1,5 +1,5 @@
-select * from weather_phenomenon_fees w
-where (w.vehicle_type_id = ? or w.vehicle_type_id is null)
-and (w.weather_phenomenon = ? or w.weather_phenomenon is null)
-order by w.vehicle_type_id desc
+select * from weather_phenomenon_fees t
+where (t.vehicle_type_id = ? or t.vehicle_type_id is null)
+and (t.weather_phenomenon = ? or t.weather_phenomenon is null)
+order by t.vehicle_type_id desc nulls last
 limit 1
