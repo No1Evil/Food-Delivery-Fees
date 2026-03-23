@@ -42,8 +42,9 @@ public class VehicleTypeServiceImpl implements VehicleTypeService {
 
     @Override
     public VehicleTypeResponse findById(@NonNull Long id) {
-        var entity = repository.findById(id)
-            .orElseThrow(() -> new EntityNotFoundException("No such vehicle with id {} found", id));
+        var entity = repository.findById(id).orElseThrow(
+            () -> new EntityNotFoundException("No such vehicle with id {} found", id)
+        );
         return mapper.toResponse(entity);
     }
 
