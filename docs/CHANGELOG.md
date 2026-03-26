@@ -1,5 +1,16 @@
 # Changelog
 
+--- [Unreleased] - 26.03.2026
+- With the Google code style every public method now has Javadoc.
+- Applied Google code style to module: persistence-impl.
+
+--- [Unreleased] - 25.03.2026
+- Applied Google code style to modules:
+  - api-protocol
+  - api-persistence
+  - api-protocol
+  - business-logic
+
 ---
 ## [Unreleased] - 22.03.2026 - 23.03.2026
 - Done a lot of work on DRY principle, made sure
