@@ -15,4 +15,5 @@ dependencies {
     implementation("org.springframework:spring-tx")
 
     testImplementation("org.springframework.boot:spring-boot-test-autoconfigure")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
