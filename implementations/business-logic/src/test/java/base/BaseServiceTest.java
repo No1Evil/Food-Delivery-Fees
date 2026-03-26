@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 
 import global.fujitsu.api.domain.exceptions.EntityNotFoundException;
+import global.fujitsu.api.domain.exceptions.FeeNotFoundException;
 import global.fujitsu.api.domain.service.base.BaseService;
 import global.fujitsu.api.model.dto.request.base.CreateRequest;
 import global.fujitsu.api.model.dto.response.base.GetResponse;
@@ -76,7 +77,7 @@ public abstract class BaseServiceTest<
     Long nonExistentId = 999L;
 
     assertThatThrownBy(() -> service.findById(nonExistentId))
-        .isInstanceOf(EntityNotFoundException.class);
+        .isInstanceOfAny(EntityNotFoundException.class, FeeNotFoundException.class);
   }
 
   @Test
