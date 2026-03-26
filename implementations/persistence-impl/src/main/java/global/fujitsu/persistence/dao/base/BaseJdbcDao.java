@@ -109,7 +109,7 @@ public abstract class BaseJdbcDao<E extends EntityModel> implements Repository<E
   @Override
   public boolean delete(@NonNull Long id) {
     log.info("Executed 'Delete entity by ID {}' query for: {}", id, mapper.getMappedClass());
-    int rows = jdbcTemplate.update(deleteByIdQuery, mapper, id);
+    int rows = jdbcTemplate.update(deleteByIdQuery, id);
     return rows > 0;
   }
 }
