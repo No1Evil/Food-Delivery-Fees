@@ -1,6 +1,6 @@
 package fee;
 
-import base.BaseJdbcBasedFeeRepositoryTest;
+import base.BaseJdbcBasedFeeDaoTest;
 import global.fujitsu.api.entity.model.fee.RegionalBasedFeeEntity;
 import global.fujitsu.api.model.dto.request.get.GetRegionalBasedFeeRequest;
 import global.fujitsu.persistence.dao.impl.fee.JdbcRegionalBasedFeeDao;
@@ -14,8 +14,8 @@ import org.springframework.test.context.jdbc.Sql;
 @Sql("/sql/regions_and_vehicles_references.sql")
 @Import(JdbcRegionalBasedFeeDao.class)
 public class JdbcRegionalBasedFeeDaoTest
-    extends BaseJdbcBasedFeeRepositoryTest<
-    JdbcRegionalBasedFeeDao, GetRegionalBasedFeeRequest,RegionalBasedFeeEntity> {
+    extends BaseJdbcBasedFeeDaoTest<
+        JdbcRegionalBasedFeeDao, GetRegionalBasedFeeRequest,RegionalBasedFeeEntity> {
 
   @Autowired
   public JdbcRegionalBasedFeeDaoTest(

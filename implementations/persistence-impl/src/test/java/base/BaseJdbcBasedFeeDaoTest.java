@@ -9,13 +9,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.jdbc.test.autoconfigure.JdbcTest;
 
 @JdbcTest
-public abstract class BaseJdbcBasedFeeRepositoryTest<
+public abstract class BaseJdbcBasedFeeDaoTest<
     R extends FeeRepository<E, FeeRequestT>,
     FeeRequestT extends GetFeeRequest,
     E extends EntityFeeModel>
-    extends BaseJdbcRepositoryTest<R, E> {
+    extends BaseJdbcDaoTest<R, E> {
 
-  public BaseJdbcBasedFeeRepositoryTest(R repository) {
+  public BaseJdbcBasedFeeDaoTest(R repository) {
     super(repository);
   }
 

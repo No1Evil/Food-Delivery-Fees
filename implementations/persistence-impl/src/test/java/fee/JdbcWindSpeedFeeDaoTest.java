@@ -1,6 +1,6 @@
 package fee;
 
-import base.BaseJdbcBasedFeeRepositoryTest;
+import base.BaseJdbcBasedFeeDaoTest;
 import global.fujitsu.api.entity.model.fee.WindSpeedFeeEntity;
 import global.fujitsu.api.model.dto.request.get.GetWindSpeedFeeRequest;
 import global.fujitsu.persistence.dao.impl.fee.JdbcWindSpeedFeeDao;
@@ -14,8 +14,8 @@ import org.springframework.test.context.jdbc.Sql;
 @Sql("/sql/regions_and_vehicles_references.sql")
 @Import(JdbcWindSpeedFeeDao.class)
 public class JdbcWindSpeedFeeDaoTest
-    extends BaseJdbcBasedFeeRepositoryTest<
-    JdbcWindSpeedFeeDao, GetWindSpeedFeeRequest, WindSpeedFeeEntity> {
+    extends BaseJdbcBasedFeeDaoTest<
+        JdbcWindSpeedFeeDao, GetWindSpeedFeeRequest, WindSpeedFeeEntity> {
 
   @Autowired
   public JdbcWindSpeedFeeDaoTest(JdbcWindSpeedFeeDao repository) {

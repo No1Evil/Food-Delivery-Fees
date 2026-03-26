@@ -1,6 +1,6 @@
 package fee;
 
-import base.BaseJdbcBasedFeeRepositoryTest;
+import base.BaseJdbcBasedFeeDaoTest;
 import global.fujitsu.api.entity.model.fee.AirTemperatureFeeEntity;
 import global.fujitsu.api.model.dto.request.get.GetAirTemperatureFeeRequest;
 import global.fujitsu.persistence.dao.impl.fee.JdbcAirTemperatureFeeDao;
@@ -14,8 +14,8 @@ import org.springframework.test.context.jdbc.Sql;
 @Sql("/sql/regions_and_vehicles_references.sql")
 @Import(JdbcAirTemperatureFeeDao.class)
 public class JdbcAirTemperatureFeeDaoTest
-    extends BaseJdbcBasedFeeRepositoryTest<
-    JdbcAirTemperatureFeeDao, GetAirTemperatureFeeRequest, AirTemperatureFeeEntity> {
+    extends BaseJdbcBasedFeeDaoTest<
+        JdbcAirTemperatureFeeDao, GetAirTemperatureFeeRequest, AirTemperatureFeeEntity> {
 
   @Autowired
   public JdbcAirTemperatureFeeDaoTest(JdbcAirTemperatureFeeDao repository) {
