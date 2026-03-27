@@ -9,6 +9,10 @@ description = "REST API Controller"
 dependencies {
     implementation(project(":api:api-protocol"))
     implementation(project(":api:api-domain"))
+
+    implementation(project(":implementations:business-logic"))
+    implementation(project(":implementations:persistence-impl"))
+
     implementation("io.jsonwebtoken:jjwt-api:0.13.0")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.13.0")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.13.0")
