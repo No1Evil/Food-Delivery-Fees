@@ -5,6 +5,7 @@ import global.fujitsu.api.model.dto.request.create.CreateWeatherPhenomenonFeeReq
 import global.fujitsu.api.model.dto.request.get.GetWeatherPhenomenonFeeRequest;
 import global.fujitsu.api.model.dto.response.get.WeatherPhenomenonFeeResponse;
 import global.fujitsu.api.model.fee.FeeResult;
+import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,12 +27,14 @@ public final class WeatherPhenomenonFeeController {
 
   /** {@return base fee} */
   @PostMapping("/base-fee")
+  @Operation(description = "Finds base fee for specified vehicle and weather phenomenon")
   public ResponseEntity<FeeResult> getBaseFee(@RequestBody GetWeatherPhenomenonFeeRequest req) {
     return ResponseEntity.ok(service.getBaseFee(req));
   }
 
   /** {@return created weather phenomenon fee id} */
   @PostMapping
+  @Operation(description = "Creates new weather phenomenon fee rule")
   public ResponseEntity<Long> create(
       @RequestBody CreateWeatherPhenomenonFeeRequest req) {
     return ResponseEntity.ok(service.create(req));
@@ -39,6 +42,7 @@ public final class WeatherPhenomenonFeeController {
 
   /** {@return found weather phenomenon fee} */
   @GetMapping("/{id}")
+  @Operation(description = "Finds weather phenomenon fee rule by id")
   public ResponseEntity<WeatherPhenomenonFeeResponse> findById(
       @PathVariable Long id) {
     return ResponseEntity.ok(service.findById(id));
@@ -46,6 +50,7 @@ public final class WeatherPhenomenonFeeController {
 
   /** {@return if fee is deleted} */
   @DeleteMapping("/{id}")
+  @Operation(description = "Deletes weather phenomenon fee rule by id")
   public ResponseEntity<Boolean> deleteById(
       @PathVariable Long id) {
     return ResponseEntity.ok(service.delete(id));
@@ -53,6 +58,7 @@ public final class WeatherPhenomenonFeeController {
 
   /** {@return found weather phenomenon fee list} */
   @GetMapping("/all")
+  @Operation(description = "Shows all weather phenomenon fee rules")
   public ResponseEntity<List<WeatherPhenomenonFeeResponse>> findAll() {
     return ResponseEntity.ok(service.findAll());
   }

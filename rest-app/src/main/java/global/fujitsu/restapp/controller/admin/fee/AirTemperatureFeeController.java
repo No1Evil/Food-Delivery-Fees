@@ -5,6 +5,7 @@ import global.fujitsu.api.model.dto.request.create.CreateAirTemperatureFeeReques
 import global.fujitsu.api.model.dto.request.get.GetAirTemperatureFeeRequest;
 import global.fujitsu.api.model.dto.response.get.AirTemperatureFeeResponse;
 import global.fujitsu.api.model.fee.FeeResult;
+import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,12 +27,14 @@ public final class AirTemperatureFeeController {
 
   /** {@return base fee} */
   @PostMapping("/base-fee")
+  @Operation(description = "Finds base fee for specified vehicle and temperature")
   public ResponseEntity<FeeResult> getBaseFee(@RequestBody GetAirTemperatureFeeRequest req) {
     return ResponseEntity.ok(service.getBaseFee(req));
   }
 
   /** {@return created air temperature fee id} */
   @PostMapping
+  @Operation(description = "Creates new air temperature fee rule")
   public ResponseEntity<Long> create(
       @RequestBody CreateAirTemperatureFeeRequest req) {
     return ResponseEntity.ok(service.create(req));
@@ -39,6 +42,7 @@ public final class AirTemperatureFeeController {
 
   /** {@return found air temperature fee} */
   @GetMapping("/{id}")
+  @Operation(description = "Finds air temperature fee rule by id")
   public ResponseEntity<AirTemperatureFeeResponse> findById(
       @PathVariable Long id) {
     return ResponseEntity.ok(service.findById(id));
@@ -46,6 +50,7 @@ public final class AirTemperatureFeeController {
 
   /** {@return if fee is deleted} */
   @DeleteMapping("/{id}")
+  @Operation(description = "Deletes air temperature fee rule by id")
   public ResponseEntity<Boolean> deleteById(
       @PathVariable Long id) {
     return ResponseEntity.ok(service.delete(id));
@@ -53,6 +58,7 @@ public final class AirTemperatureFeeController {
 
   /** {@return found air temperature fee list} */
   @GetMapping("/all")
+  @Operation(description = "Shows all air temperature fee rules")
   public ResponseEntity<List<AirTemperatureFeeResponse>> findAll() {
     return ResponseEntity.ok(service.findAll());
   }

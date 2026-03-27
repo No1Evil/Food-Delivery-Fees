@@ -5,6 +5,7 @@ import global.fujitsu.api.model.dto.request.create.CreateWindSpeedFeeRequest;
 import global.fujitsu.api.model.dto.request.get.GetWindSpeedFeeRequest;
 import global.fujitsu.api.model.dto.response.get.WindSpeedFeeResponse;
 import global.fujitsu.api.model.fee.FeeResult;
+import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,12 +27,14 @@ public final class WindSpeedFeeController {
 
   /** {@return base fee} */
   @PostMapping("/base-fee")
+  @Operation(description = "Finds base fee for specified vehicle and wind speed")
   public ResponseEntity<FeeResult> getBaseFee(@RequestBody GetWindSpeedFeeRequest req) {
     return ResponseEntity.ok(service.getBaseFee(req));
   }
 
   /** {@return created region id} */
   @PostMapping
+  @Operation(description = "Creates new wind speed fee rule")
   public ResponseEntity<Long> create(
       @RequestBody CreateWindSpeedFeeRequest req) {
     return ResponseEntity.ok(service.create(req));
@@ -39,6 +42,7 @@ public final class WindSpeedFeeController {
 
   /** {@return found region} */
   @GetMapping("/{id}")
+  @Operation(description = "Finds wind speed fee rule by id")
   public ResponseEntity<WindSpeedFeeResponse> findById(
       @PathVariable Long id) {
     return ResponseEntity.ok(service.findById(id));
@@ -46,6 +50,7 @@ public final class WindSpeedFeeController {
 
   /** {@return if region is deleted} */
   @DeleteMapping("/{id}")
+  @Operation(description = "Deletes wind speed fee rule by id")
   public ResponseEntity<Boolean> deleteById(
       @PathVariable Long id) {
     return ResponseEntity.ok(service.delete(id));
@@ -53,6 +58,7 @@ public final class WindSpeedFeeController {
 
   /** {@return found region list} */
   @GetMapping("/all")
+  @Operation(description = "Shows all wind speed fee rules")
   public ResponseEntity<List<WindSpeedFeeResponse>> findAll() {
     return ResponseEntity.ok(service.findAll());
   }

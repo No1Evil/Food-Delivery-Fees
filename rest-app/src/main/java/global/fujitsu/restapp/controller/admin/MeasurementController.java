@@ -4,6 +4,7 @@ import global.fujitsu.api.domain.service.MeasurementService;
 import global.fujitsu.api.model.dto.request.create.CreateMeasurementRequest;
 import global.fujitsu.api.model.dto.request.get.GetMeasurementRequest;
 import global.fujitsu.api.model.dto.response.get.MeasurementResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,6 +27,7 @@ public final class MeasurementController {
 
   /** {@return measurement list or exact by request} */
   @GetMapping
+  @Operation(description = "Finds exact measurement or else all")
   public ResponseEntity<?> find(
       @RequestBody(required = false) GetMeasurementRequest request) {
     if (request != null) {
@@ -36,18 +38,21 @@ public final class MeasurementController {
 
   /** {@return created measurement id} */
   @PostMapping
+  @Operation(description = "creates new measurement")
   public ResponseEntity<Long> create(
       @RequestBody CreateMeasurementRequest request) {
     return ResponseEntity.ok(service.create(request));
   }
 
   @GetMapping("/{id}")
+  @Operation(description = "Finds measurement by id")
   public ResponseEntity<MeasurementResponse> findById(@PathVariable Long id) {
     return ResponseEntity.ok(service.findById(id));
   }
 
   /** {@return if measurement was deleted} */
   @DeleteMapping("/{id}")
+  @Operation(description = "Deletes measurement by id")
   public ResponseEntity<Boolean> deleteById(@PathVariable Long id) {
     return ResponseEntity.ok(service.delete(id));
   }

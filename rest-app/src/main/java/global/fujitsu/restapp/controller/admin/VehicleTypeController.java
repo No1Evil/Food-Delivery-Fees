@@ -4,6 +4,7 @@ import global.fujitsu.api.domain.service.VehicleTypeService;
 import global.fujitsu.api.model.dto.request.create.CreateVehicleTypeRequest;
 import global.fujitsu.api.model.dto.response.get.VehicleTypeResponse;
 import global.fujitsu.api.model.vehicle.VehicleType;
+import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,7 @@ public final class VehicleTypeController {
 
   /** {@return found vehicle type or all vehicles} */
   @GetMapping
+  @Operation(description = "Finds vehicle by name or else all")
   public ResponseEntity<?> find(@RequestBody(required = false) VehicleType vehicleType) {
     if (vehicleType != null) {
       return ResponseEntity.ok(service.findByName(vehicleType));
@@ -34,18 +36,21 @@ public final class VehicleTypeController {
 
   /** {@return created vehicle type id} */
   @PostMapping
+  @Operation(description = "Creates new vehicle type")
   public ResponseEntity<Long> createVehicleType(@RequestBody CreateVehicleTypeRequest req) {
     return ResponseEntity.ok(service.create(req));
   }
 
   /** {@return is vehicle type deleted} */
   @DeleteMapping("/{id}")
+  @Operation(description = "Deletes vehicle by id")
   public ResponseEntity<Boolean> delete(@PathVariable Long id) {
     return ResponseEntity.ok(service.delete(id));
   }
 
   /** {@return found vehicle type} */
   @GetMapping("/{id}")
+  @Operation(description = "Finds vehicle by id")
   public ResponseEntity<VehicleTypeResponse> findById(@PathVariable Long id) {
     return ResponseEntity.ok(service.findById(id));
   }

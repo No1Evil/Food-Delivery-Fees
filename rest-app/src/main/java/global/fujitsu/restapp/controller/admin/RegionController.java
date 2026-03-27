@@ -32,7 +32,7 @@ public final class RegionController {
    * @return all regions or by name or by code
    */
   @GetMapping
-  @Operation(description = "Finds by region name or all")
+  @Operation(description = "Finds by region name or else all")
   public ResponseEntity<?> find(
       @RequestBody(required = false) RegionName name) {
     if (name != null) {
@@ -43,18 +43,21 @@ public final class RegionController {
 
   /** {@return created region id} */
   @PostMapping
+  @Operation(description = "Creates new region")
   public ResponseEntity<Long> createRegion(@RequestBody CreateRegionRequest req) {
     return ResponseEntity.ok(service.create(req));
   }
 
   /** {@return found region} */
   @GetMapping("/{id}")
+  @Operation(description = "Finds region by id")
   public ResponseEntity<RegionResponse> findById(@PathVariable Long id) {
     return ResponseEntity.ok(service.findById(id));
   }
 
   /** {@return if region is deleted} */
   @DeleteMapping("/{id}")
+  @Operation(description = "Deletes region by id")
   public ResponseEntity<Boolean> deleteById(@PathVariable Long id) {
     return ResponseEntity.ok(service.delete(id));
   }
