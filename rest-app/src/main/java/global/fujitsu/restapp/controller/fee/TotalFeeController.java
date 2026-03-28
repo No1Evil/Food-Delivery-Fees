@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /** Provides API for total fee calculation. */
 @RestController
-@RequestMapping(value = "/api/fee", headers = "X-API-VERSION=1")
+@RequestMapping(value = "/fee", headers = "X-API-VERSION=1")
 @RequiredArgsConstructor
 public final class TotalFeeController {
 
