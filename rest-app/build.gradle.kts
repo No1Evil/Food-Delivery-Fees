@@ -10,6 +10,7 @@ dependencies {
     implementation(project(":api:api-protocol"))
     implementation(project(":api:api-domain"))
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.2")
+    implementation("org.springframework.boot:spring-boot-starter-security-oauth2-authorization-server")
 
     runtimeOnly(project(":implementations:business-logic"))
     runtimeOnly(project(":implementations:persistence-impl"))
