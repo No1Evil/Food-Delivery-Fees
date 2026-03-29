@@ -4,6 +4,7 @@ import global.fujitsu.api.domain.service.MeasurementService;
 import global.fujitsu.api.model.dto.request.create.CreateMeasurementRequest;
 import global.fujitsu.api.model.dto.request.get.GetMeasurementRequest;
 import global.fujitsu.api.model.dto.response.get.MeasurementResponse;
+import global.fujitsu.restapp.domain.service.MeasurementSyncService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public final class MeasurementController {
 
+  private final MeasurementSyncService measurementSyncService;
   private final MeasurementService service;
 
   /** {@return measurement list or exact by request} */
@@ -34,6 +36,14 @@ public final class MeasurementController {
       return ResponseEntity.ok(service.find(request));
     }
     return ResponseEntity.ok(service.findAll());
+  }
+
+  /** Starts the measurement sync task. */
+  @PostMapping("/sync")
+  @Operation(description = "Starts the measurement sync task manually with ilmateenistus")
+  public ResponseEntity<?> sync() {
+    measurementSyncService.sync();
+    return ResponseEntity.ok().build();
   }
 
   /** {@return created measurement id} */
