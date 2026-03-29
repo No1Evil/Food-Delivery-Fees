@@ -1,6 +1,6 @@
 # Changelog
 
-## [Release-1.0] - 29.03.2026
+## [Unreleased] - 29.03.2026
 - Applied C4 models of system context and rest-app
 - Completed the fast-start section in README.md
 - Weather sync CRON scheduler is configurable via .env
