@@ -1,0 +1,31 @@
+services:
+  db:
+    image: oscarfonts/h2:latest
+    container_name: h2
+    environment:
+      - H2_OPTIONS=-ifNotExists -tcpAllowOthers
+    ports:
+      - "1521:1521"
+      - "81:81"
+    volumes:
+      - h2_data:/opt/h2-data
+      - h2_init_scripts:/docker-entrypoint-initdb.d:ro
+
+  rest-app:
+    build:
+      context: .
+      dockerfile: rest-app/Dockerfile
+    container_name: rest_app
+    env_file:
+      - .env
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - DATABASE_URL=tcp://db:1521/./fujitsu_db
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  h2_data:
+  h2_init_scripts:
