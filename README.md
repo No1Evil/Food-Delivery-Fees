@@ -26,6 +26,68 @@ conditions.
 ## 
 
 # Fast start
+<details>
+<summary>Running production profile with Docker</summary>
+
+### Installation
+Clone the repo to your local machine
+
+`git clone https://github.com/No1Evil/CGI-Restaurant.git`
+
+### Configuring environment variables
+Create `.env` in root directory and copy contains of `.env.example`
+
+Or use: `cp .env.example .env`
+
+Set variable `SPRING_PROFILES_ACTIVE` to `prod` 
+
+### Running
+***Make sure you have docker installed***
+
+`docker compose --profile prod up -d --build`
+
+</details>
+
+---
+
+<details>
+<summary>Running development profile with Docker</summary>
+
+Clone the repo to your local machine
+
+`git clone https://github.com/No1Evil/CGI-Restaurant.git`
+
+### Configuring environment variables
+Create `.env` in root directory and copy contains of `.env.example`
+
+Or use: `cp .env.example .env`
+
+Set variable `SPRING_PROFILES_ACTIVE` to `dev`
+
+### Running
+***Make sure you have docker installed***
+
+`docker compose --profile dev up -d --build`
+</details>
+
+---
+
+<details>
+<summary>Running dev in IDE</summary>
+
+### Installation
+Clone the repo to your local machine
+
+`git clone https://github.com/No1Evil/CGI-Restaurant.git`
+
+### Configuring environment variables
+Configure environment variable `JWT_TOKEN` and `SPRING_PROFILES_ACTIVE=dev`
+in your IDE.
+
+### Running
+Module `rest-app` -> `bootRun`
+
+</details>
 
 ---
 ## Authors
