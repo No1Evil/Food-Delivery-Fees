@@ -54,6 +54,7 @@ public final class MeasurementController {
     return ResponseEntity.ok(service.create(request));
   }
 
+  /** {@return found measurement} */
   @GetMapping("/{id}")
   @Operation(description = "Finds measurement by id")
   public ResponseEntity<MeasurementResponse> findById(@PathVariable Long id) {
