@@ -1,5 +1,6 @@
 package global.fujitsu.api.entity.model.fee;
 
+import global.fujitsu.api.model.weather.WeatherPhenomenon;
 import lombok.NonNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -12,6 +13,7 @@ public record WeatherPhenomenonFeeEntity(
     @Nullable Long id,
     @NonNull Long vehicleTypeId,
     @NonNull String weatherPhenomenon,
+    @NonNull WeatherPhenomenon weatherPhenomenon,
     @NonNull BigDecimal fee,
     @NonNull Boolean isAllowed)
     implements EntityFeeModel {

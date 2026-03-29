@@ -3,7 +3,6 @@ package global.fujitsu.domain.mapper.impl;
 import global.fujitsu.api.entity.model.vehicle.VehicleTypeEntity;
 import global.fujitsu.api.model.dto.request.create.CreateVehicleTypeRequest;
 import global.fujitsu.api.model.dto.response.get.VehicleTypeResponse;
-import global.fujitsu.api.model.vehicle.VehicleType;
 import global.fujitsu.domain.mapper.RequestMapper;
 import global.fujitsu.domain.mapper.ResponseMapper;
 

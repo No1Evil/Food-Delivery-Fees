@@ -1,6 +1,7 @@
 package global.fujitsu.restapp.domain.parser;
 
 import global.fujitsu.api.model.dto.request.create.CreateMeasurementRequest;
+import global.fujitsu.api.model.weather.WeatherPhenomenon;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -27,7 +28,7 @@ public class MeasurementParser {
     String regionName = null;
     BigDecimal airTemp = null;
     BigDecimal windSpeed = null;
-    String phenomenon = null;
+    WeatherPhenomenon phenomenon = null;
 
     while (reader.hasNext()) {
       int event = reader.next();
@@ -49,7 +50,10 @@ public class MeasurementParser {
             String val = reader.getElementText();
             windSpeed = val.isEmpty() ? null : BigDecimal.valueOf(Double.parseDouble(val));
           }
-          case "phenomenon" -> phenomenon = reader.getElementText();
+          case "phenomenon" -> {
+            String rawPhenomenon = reader.getElementText();
+            phenomenon = new WeatherPhenomenon(rawPhenomenon);
+          }
 
           default -> {
             continue;

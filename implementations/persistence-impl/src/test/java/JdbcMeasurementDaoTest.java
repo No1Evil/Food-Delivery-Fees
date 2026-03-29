@@ -1,5 +1,6 @@
 import base.BaseJdbcDaoTest;
 import global.fujitsu.api.entity.model.measurement.MeasurementEntity;
+import global.fujitsu.api.model.weather.WeatherPhenomenon;
 import global.fujitsu.persistence.dao.impl.JdbcMeasurementDao;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -25,7 +26,7 @@ public class JdbcMeasurementDaoTest extends BaseJdbcDaoTest<JdbcMeasurementDao, 
         1L,
         BigDecimal.ONE,
         BigDecimal.ONE,
-        "rain",
+        new WeatherPhenomenon("rain"),
         Instant.now()
     );
   }

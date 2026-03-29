@@ -1,6 +1,7 @@
 package global.fujitsu.api.model.dto.response.get;
 
 import global.fujitsu.api.model.dto.response.base.GetResponse;
+import global.fujitsu.api.model.weather.WeatherPhenomenon;
 import lombok.NonNull;
 
 import java.math.BigDecimal;
@@ -11,7 +12,7 @@ public record MeasurementResponse(
     @NonNull Long regionId,
     @NonNull BigDecimal airTemperature,
     @NonNull BigDecimal windSpeed,
-    @NonNull String weatherPhenomenon,
+    @NonNull WeatherPhenomenon weatherPhenomenon,
     @NonNull Instant measuredAt
 ) implements GetResponse {
 }

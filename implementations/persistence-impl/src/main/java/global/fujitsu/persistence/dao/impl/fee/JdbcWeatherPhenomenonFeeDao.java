@@ -54,7 +54,7 @@ public class JdbcWeatherPhenomenonFeeDao
   protected PreparedStatement prepareSaveStatement(PreparedStatement ps,
       WeatherPhenomenonFeeEntity entity) throws SQLException {
     ps.setLong(1, entity.vehicleTypeId());
-    ps.setString(2, entity.weatherPhenomenon());
+    ps.setString(2, entity.weatherPhenomenon().value());
     ps.setBigDecimal(3, entity.fee());
     ps.setBoolean(4, entity.isAllowed());
     return ps;

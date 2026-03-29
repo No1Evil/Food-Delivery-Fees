@@ -50,7 +50,7 @@ public class JdbcMeasurementDao
     preparedStatement.setLong(1, entity.regionId());
     preparedStatement.setBigDecimal(2, entity.airTemperature());
     preparedStatement.setBigDecimal(3, entity.windSpeed());
-    preparedStatement.setString(4, entity.weatherPhenomenon());
+    preparedStatement.setString(4, entity.weatherPhenomenon().value());
     preparedStatement.setTimestamp(5, Timestamp.from(entity.measuredAt()));
     return preparedStatement;
   }

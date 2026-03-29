@@ -1,6 +1,7 @@
 package global.fujitsu.api.entity.model.measurement;
 
 import global.fujitsu.api.entity.model.EntityModel;
+import global.fujitsu.api.model.weather.WeatherPhenomenon;
 import lombok.NonNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -10,7 +11,7 @@ import java.sql.SQLException;
 import java.time.Instant;
 
 /**
- * @param weatherPhenomenon weather value
+ * Contains weather measurements associated with region.
  */
 public record MeasurementEntity(
     @Nullable Long id,
@@ -18,16 +19,8 @@ public record MeasurementEntity(
     @NonNull BigDecimal airTemperature,
     @NonNull BigDecimal windSpeed,
     // Maybe replace with WeatherType || PhenomenonType
-    @NonNull String weatherPhenomenon,
+    @NonNull WeatherPhenomenon weatherPhenomenon,
     @NonNull Instant measuredAt)
     implements EntityModel {
 
-  /**
-   * Creates MeasurementEntity, checks if weather phenomenon string is empty.
-   */
-  public MeasurementEntity {
-    if (weatherPhenomenon.isBlank()) {
-      throw new IllegalArgumentException("Weather phenomenon cannot be empty");
-    }
-  }
 }
