@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 public record RegionalBasedFeeEntity(
     @Nullable Long id,
     @NonNull Long regionId,
-    @NonNull Long vehicleTypeId,
+    @Nullable Long vehicleTypeId,
     @NonNull BigDecimal fee,
     @NonNull Boolean isAllowed)
     implements EntityFeeModel {
