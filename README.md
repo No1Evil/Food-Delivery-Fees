@@ -75,7 +75,7 @@ Set variable `SPRING_PROFILES_ACTIVE` to `prod`
 <summary>Running development profile with Docker</summary>
 
 ### Note
-That runs an embedded H2 database.
+That runs an in-memory H2 database.
 
 ### Installation
 Clone the repo to your local machine
@@ -101,7 +101,7 @@ Set variable `SPRING_PROFILES_ACTIVE` to `dev`
 <summary>Running dev in IDE</summary>
 
 ### Note
-That runs an embedded H2 database.
+That runs an in-memory H2 database.
 
 ### Installation
 Clone the repo to your local machine.
