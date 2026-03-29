@@ -29,8 +29,12 @@ conditions.
 <details>
 <summary>Running production profile with Docker</summary>
 
+### Note
+That runs a separate H2 container without any data,
+which is not exposed in the internet.
+
 ### Installation
-Clone the repo to your local machine
+Clone the repo to your local machine.
 
 `git clone https://github.com/No1Evil/CGI-Restaurant.git`
 
@@ -53,6 +57,10 @@ Set variable `SPRING_PROFILES_ACTIVE` to `prod`
 <details>
 <summary>Running development profile with Docker</summary>
 
+### Note
+That runs an embedded H2 database.
+
+### Installation
 Clone the repo to your local machine
 
 `git clone https://github.com/No1Evil/CGI-Restaurant.git`
@@ -75,8 +83,11 @@ Set variable `SPRING_PROFILES_ACTIVE` to `dev`
 <details>
 <summary>Running dev in IDE</summary>
 
+### Note
+That runs an embedded H2 database.
+
 ### Installation
-Clone the repo to your local machine
+Clone the repo to your local machine.
 
 `git clone https://github.com/No1Evil/CGI-Restaurant.git`
 
