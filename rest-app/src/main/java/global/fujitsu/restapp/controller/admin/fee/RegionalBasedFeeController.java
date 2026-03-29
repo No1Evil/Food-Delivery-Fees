@@ -6,6 +6,7 @@ import global.fujitsu.api.model.dto.request.get.GetRegionalBasedFeeRequest;
 import global.fujitsu.api.model.dto.response.get.RegionalBasedFeeResponse;
 import global.fujitsu.api.model.fee.FeeResult;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public final class RegionalBasedFeeController {
   /** {@return base fee} */
   @PostMapping("/base-fee")
   @Operation(description = "Finds base fee for specified vehicle and region")
-  public ResponseEntity<FeeResult> getBaseFee(@RequestBody GetRegionalBasedFeeRequest req) {
+  public ResponseEntity<FeeResult> getBaseFee(@Valid @RequestBody GetRegionalBasedFeeRequest req) {
     return ResponseEntity.ok(service.getBaseFee(req));
   }
 
@@ -36,7 +37,7 @@ public final class RegionalBasedFeeController {
   @PostMapping
   @Operation(description = "Creates new regional based fee rule")
   public ResponseEntity<Long> create(
-      @RequestBody CreateRegionalBasedFeeRequest req) {
+      @Valid @RequestBody CreateRegionalBasedFeeRequest req) {
     return ResponseEntity.ok(service.create(req));
   }
 

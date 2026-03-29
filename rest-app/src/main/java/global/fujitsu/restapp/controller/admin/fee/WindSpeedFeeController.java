@@ -6,6 +6,7 @@ import global.fujitsu.api.model.dto.request.get.GetWindSpeedFeeRequest;
 import global.fujitsu.api.model.dto.response.get.WindSpeedFeeResponse;
 import global.fujitsu.api.model.fee.FeeResult;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public final class WindSpeedFeeController {
   /** {@return base fee} */
   @PostMapping("/base-fee")
   @Operation(description = "Finds base fee for specified vehicle and wind speed")
-  public ResponseEntity<FeeResult> getBaseFee(@RequestBody GetWindSpeedFeeRequest req) {
+  public ResponseEntity<FeeResult> getBaseFee(@Valid @RequestBody GetWindSpeedFeeRequest req) {
     return ResponseEntity.ok(service.getBaseFee(req));
   }
 
@@ -36,7 +37,7 @@ public final class WindSpeedFeeController {
   @PostMapping
   @Operation(description = "Creates new wind speed fee rule")
   public ResponseEntity<Long> create(
-      @RequestBody CreateWindSpeedFeeRequest req) {
+      @Valid @RequestBody CreateWindSpeedFeeRequest req) {
     return ResponseEntity.ok(service.create(req));
   }
 

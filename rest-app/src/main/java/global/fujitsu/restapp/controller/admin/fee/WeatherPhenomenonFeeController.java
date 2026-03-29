@@ -6,6 +6,7 @@ import global.fujitsu.api.model.dto.request.get.GetWeatherPhenomenonFeeRequest;
 import global.fujitsu.api.model.dto.response.get.WeatherPhenomenonFeeResponse;
 import global.fujitsu.api.model.fee.FeeResult;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public final class WeatherPhenomenonFeeController {
   /** {@return base fee} */
   @PostMapping("/base-fee")
   @Operation(description = "Finds base fee for specified vehicle and weather phenomenon")
-  public ResponseEntity<FeeResult> getBaseFee(@RequestBody GetWeatherPhenomenonFeeRequest req) {
+  public ResponseEntity<FeeResult> getBaseFee(@Valid @RequestBody GetWeatherPhenomenonFeeRequest req) {
     return ResponseEntity.ok(service.getBaseFee(req));
   }
 
@@ -36,7 +37,7 @@ public final class WeatherPhenomenonFeeController {
   @PostMapping
   @Operation(description = "Creates new weather phenomenon fee rule")
   public ResponseEntity<Long> create(
-      @RequestBody CreateWeatherPhenomenonFeeRequest req) {
+      @Valid @RequestBody CreateWeatherPhenomenonFeeRequest req) {
     return ResponseEntity.ok(service.create(req));
   }
 

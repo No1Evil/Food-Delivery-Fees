@@ -6,6 +6,7 @@ import global.fujitsu.api.model.dto.request.get.GetMeasurementRequest;
 import global.fujitsu.api.model.dto.response.get.MeasurementResponse;
 import global.fujitsu.restapp.domain.service.MeasurementSyncService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,7 +32,7 @@ public final class MeasurementController {
   @GetMapping
   @Operation(description = "Finds exact measurement or else all")
   public ResponseEntity<?> find(
-      @RequestBody(required = false) GetMeasurementRequest request) {
+      @Valid @RequestBody(required = false) GetMeasurementRequest request) {
     if (request != null) {
       return ResponseEntity.ok(service.find(request));
     }
@@ -50,7 +51,7 @@ public final class MeasurementController {
   @PostMapping
   @Operation(description = "creates new measurement")
   public ResponseEntity<Long> create(
-      @RequestBody CreateMeasurementRequest request) {
+      @Valid @RequestBody CreateMeasurementRequest request) {
     return ResponseEntity.ok(service.create(request));
   }
 

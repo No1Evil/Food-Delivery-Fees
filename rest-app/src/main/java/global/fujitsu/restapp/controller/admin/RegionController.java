@@ -5,6 +5,7 @@ import global.fujitsu.api.model.dto.request.create.CreateRegionRequest;
 import global.fujitsu.api.model.dto.response.get.RegionResponse;
 import global.fujitsu.api.model.region.RegionName;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +35,7 @@ public final class RegionController {
   @GetMapping
   @Operation(description = "Finds by region name or else all")
   public ResponseEntity<?> find(
-      @RequestBody(required = false) RegionName name) {
+      @Valid @RequestBody(required = false) RegionName name) {
     if (name != null) {
       return ResponseEntity.ok(service.findByRegionName(name));
     }
@@ -44,7 +45,7 @@ public final class RegionController {
   /** {@return created region id} */
   @PostMapping
   @Operation(description = "Creates new region")
-  public ResponseEntity<Long> createRegion(@RequestBody CreateRegionRequest req) {
+  public ResponseEntity<Long> createRegion(@Valid @RequestBody CreateRegionRequest req) {
     return ResponseEntity.ok(service.create(req));
   }
 

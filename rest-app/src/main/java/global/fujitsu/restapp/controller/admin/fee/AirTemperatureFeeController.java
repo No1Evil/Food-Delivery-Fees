@@ -6,6 +6,7 @@ import global.fujitsu.api.model.dto.request.get.GetAirTemperatureFeeRequest;
 import global.fujitsu.api.model.dto.response.get.AirTemperatureFeeResponse;
 import global.fujitsu.api.model.fee.FeeResult;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public final class AirTemperatureFeeController {
   /** {@return base fee} */
   @PostMapping("/base-fee")
   @Operation(description = "Finds base fee for specified vehicle and temperature")
-  public ResponseEntity<FeeResult> getBaseFee(@RequestBody GetAirTemperatureFeeRequest req) {
+  public ResponseEntity<FeeResult> getBaseFee(@Valid @RequestBody GetAirTemperatureFeeRequest req) {
     return ResponseEntity.ok(service.getBaseFee(req));
   }
 
@@ -36,7 +37,7 @@ public final class AirTemperatureFeeController {
   @PostMapping
   @Operation(description = "Creates new air temperature fee rule")
   public ResponseEntity<Long> create(
-      @RequestBody CreateAirTemperatureFeeRequest req) {
+      @Valid @RequestBody CreateAirTemperatureFeeRequest req) {
     return ResponseEntity.ok(service.create(req));
   }
 
