@@ -14,14 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.jdbc.test.autoconfigure.JdbcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 
 @JdbcTest
 @Sql(scripts = "classpath:schema.sql")
+@ActiveProfiles("test")
 @ContextConfiguration(classes = BaseServiceTest.TestConfig.class)
 @RequiredArgsConstructor
 public abstract class BaseServiceTest<

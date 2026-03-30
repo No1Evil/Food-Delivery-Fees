@@ -6,8 +6,10 @@ import global.fujitsu.persistence.dao.impl.JdbcRegionDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.test.autoconfigure.JdbcTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.jdbc.Sql;
 
 @JdbcTest
+@Sql(scripts = "classpath:scripts/cleanup_regions.sql")
 @Import(JdbcRegionDao.class)
 public class JdbcRegionDaoTest
     extends BaseJdbcDaoTest<JdbcRegionDao, RegionEntity> {

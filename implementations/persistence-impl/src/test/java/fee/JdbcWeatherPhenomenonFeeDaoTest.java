@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.jdbc.Sql;
 
 @JdbcTest
-@Sql(scripts = "classpath:sql/scripts/regions_and_vehicles_references.sql")
 @Import(JdbcWeatherPhenomenonFeeDao.class)
 public class JdbcWeatherPhenomenonFeeDaoTest
     extends BaseJdbcBasedFeeDaoTest<
