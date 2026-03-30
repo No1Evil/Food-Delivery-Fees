@@ -5,17 +5,10 @@ import global.fujitsu.api.model.dto.request.create.CreateWeatherPhenomenonFeeReq
 import global.fujitsu.api.model.dto.request.get.GetWeatherPhenomenonFeeRequest;
 import global.fujitsu.api.model.dto.response.get.WeatherPhenomenonFeeResponse;
 import global.fujitsu.api.model.weather.WeatherPhenomenon;
-import global.fujitsu.domain.mapper.impl.WeatherPhenomenonFeeMapper;
 import global.fujitsu.domain.service.fee.WeatherPhenomenonFeeServiceImpl;
-import global.fujitsu.persistence.dao.impl.fee.JdbcWeatherPhenomenonFeeDao;
 import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jdbc.test.autoconfigure.JdbcTest;
-import org.springframework.context.annotation.Import;
 
-@JdbcTest
-@Import({WeatherPhenomenonFeeServiceImpl.class, WeatherPhenomenonFeeMapper.class,
-    JdbcWeatherPhenomenonFeeDao.class})
 public class WeatherPhenomenonFeeServiceImplTest
     extends BaseFeeServiceTest<
     WeatherPhenomenonFeeServiceImpl,

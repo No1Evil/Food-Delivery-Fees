@@ -1,9 +1,10 @@
-package global.fujitsu.restapp.controller.admin;
+package global.fujitsu.restapp.controller.client;
 
 import java.time.Instant;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.Authentication;
@@ -26,6 +27,8 @@ public final class LoginController {
 
   private final JwtEncoder encoder;
   private final AuthenticationConfiguration authConfig;
+  @Value("${env.JWT_EXPIRE_TIME_IN_SECONDS:3600}")
+  private int expirationTimeSeconds;
 
   /** {@return authorized jwt token} */
   @PostMapping("/login")
@@ -44,7 +47,7 @@ public final class LoginController {
         .issuer("self")
         .claim("roles", roles)
         .issuedAt(now)
-        .expiresAt(now.plusSeconds(3600))
+        .expiresAt(now.plusSeconds(expirationTimeSeconds))
         .subject(auth.getName())
         .build();
 

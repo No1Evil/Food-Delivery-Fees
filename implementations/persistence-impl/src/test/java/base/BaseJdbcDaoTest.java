@@ -14,9 +14,11 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.jdbc.test.autoconfigure.JdbcTest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 
 @JdbcTest
+@ActiveProfiles("test")
 @ContextConfiguration(classes = BaseJdbcDaoTest.TestConfig.class)
 public abstract class BaseJdbcDaoTest<
     R extends Repository<E>,

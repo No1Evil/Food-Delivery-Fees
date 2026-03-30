@@ -61,7 +61,7 @@ public class JdbcAirTemperatureFeeDao
     ps.setBigDecimal(2, entity.minTemperature());
     ps.setBigDecimal(3, entity.maxTemperature());
     ps.setBigDecimal(4, entity.fee());
-    ps.setBoolean(4, entity.isAllowed());
+    ps.setBoolean(5, entity.isAllowed());
     return ps;
   }
 }

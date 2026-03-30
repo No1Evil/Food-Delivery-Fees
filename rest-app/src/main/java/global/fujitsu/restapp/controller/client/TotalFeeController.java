@@ -1,4 +1,4 @@
-package global.fujitsu.restapp.controller.fee;
+package global.fujitsu.restapp.controller.client;
 
 import global.fujitsu.api.domain.service.TotalFeeService;
 import global.fujitsu.api.model.dto.request.get.TotalFeeRequest;

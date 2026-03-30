@@ -10,58 +10,19 @@ import base.BaseTotalFeeServiceTest;
 import global.fujitsu.api.domain.exceptions.RestrictedConditionException;
 import global.fujitsu.api.model.dto.response.get.TotalFeeResponse;
 import global.fujitsu.api.model.weather.WeatherPhenomenon;
-import global.fujitsu.domain.mapper.impl.AirTemperatureFeeMapper;
-import global.fujitsu.domain.mapper.impl.MeasurementMapper;
-import global.fujitsu.domain.mapper.impl.RegionMapper;
-import global.fujitsu.domain.mapper.impl.RegionalBasedFeeMapper;
-import global.fujitsu.domain.mapper.impl.VehicleTypeMapper;
-import global.fujitsu.domain.mapper.impl.WeatherPhenomenonFeeMapper;
-import global.fujitsu.domain.mapper.impl.WindSpeedFeeMapper;
-import global.fujitsu.domain.service.MeasurementServiceImpl;
-import global.fujitsu.domain.service.RegionServiceImpl;
-import global.fujitsu.domain.service.VehicleTypeServiceImpl;
-import global.fujitsu.domain.service.fee.AirTemperatureFeeServiceImpl;
-import global.fujitsu.domain.service.fee.RegionalBasedFeeServiceImpl;
 import global.fujitsu.domain.service.fee.TotalFeeServiceImpl;
-import global.fujitsu.domain.service.fee.WeatherPhenomenonFeeServiceImpl;
-import global.fujitsu.domain.service.fee.WindSpeedFeeServiceImpl;
-import global.fujitsu.persistence.dao.impl.JdbcMeasurementDao;
-import global.fujitsu.persistence.dao.impl.JdbcRegionDao;
-import global.fujitsu.persistence.dao.impl.JdbcVehicleTypeDao;
-import global.fujitsu.persistence.dao.impl.fee.JdbcAirTemperatureFeeDao;
-import global.fujitsu.persistence.dao.impl.fee.JdbcRegionalBasedFeeDao;
-import global.fujitsu.persistence.dao.impl.fee.JdbcWeatherPhenomenonFeeDao;
-import global.fujitsu.persistence.dao.impl.fee.JdbcWindSpeedFeeDao;
-import java.math.BigDecimal;
 import java.time.Instant;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jdbc.test.autoconfigure.JdbcTest;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
-@JdbcTest
-@Import({
-    TotalFeeServiceImpl.class,
-    MeasurementServiceImpl.class, JdbcMeasurementDao.class, MeasurementMapper.class,
-    RegionServiceImpl.class, JdbcRegionDao.class, RegionMapper.class,
-    AirTemperatureFeeServiceImpl.class, JdbcAirTemperatureFeeDao.class,
-    AirTemperatureFeeMapper.class,
-    WeatherPhenomenonFeeServiceImpl.class, JdbcWeatherPhenomenonFeeDao.class,
-    WeatherPhenomenonFeeMapper.class,
-    RegionalBasedFeeServiceImpl.class, JdbcRegionalBasedFeeDao.class, RegionalBasedFeeMapper.class,
-    WindSpeedFeeServiceImpl.class, JdbcWindSpeedFeeDao.class, WindSpeedFeeMapper.class,
-    VehicleTypeServiceImpl.class, JdbcVehicleTypeDao.class, VehicleTypeMapper.class,
-})
-@ContextConfiguration(classes = TotalFeeServiceImplTest.class)
+@Transactional
 public class TotalFeeServiceImplTest extends BaseTotalFeeServiceTest {
 
   @Autowired
   private TotalFeeServiceImpl totalFeeService;
-  @Autowired
-  private MeasurementServiceImpl measurementService;
 
   private final Long Tallinn = 1L;
   private final Long Tartu = 2L;
@@ -85,8 +46,10 @@ public class TotalFeeServiceImplTest extends BaseTotalFeeServiceTest {
     createMeasurement(Tallinn, -4.0, 15.0,
         new WeatherPhenomenon("rain"), lookUpTime.minusSeconds(10));
 
+    createWeatherPhenomenonFee(null, new WeatherPhenomenon("rain"), 0.5, true);
+
     TotalFeeResponse totalFee = totalFeeService.getTotalFee(
-        createTotalFeeRequest("Tallinn", "Bike", lookUpTime));
+        createTotalFeeRequest(Tallinn, bikeId, lookUpTime));
 
     assertEquals(4.5, totalFee.fee().doubleValue(),
         "Fee should include temperature, wind, and rain surcharges.");
@@ -99,9 +62,12 @@ public class TotalFeeServiceImplTest extends BaseTotalFeeServiceTest {
     createMeasurement(Tallinn, 15.0, 21.0,
         new WeatherPhenomenon("clear"), lookUpTime.minusSeconds(10));
 
+    createAirTemperatureFee(null, -999, 999, 0, true);
+    createWindSpeedFee(null, 20, 50, 0, false);
+
     assertThrows(RestrictedConditionException.class, () -> {
       totalFeeService.getTotalFee(
-          createTotalFeeRequest("Tallinn", "Bike", lookUpTime));
+          createTotalFeeRequest(Tallinn, bikeId, lookUpTime));
     }, "Should throw exception when wind speed exceeds safety limits for bikes.");
   }
 
@@ -113,7 +79,7 @@ public class TotalFeeServiceImplTest extends BaseTotalFeeServiceTest {
         new WeatherPhenomenon("clear"), lookUpTime.minusSeconds(1));
 
     TotalFeeResponse totalFee =
-        totalFeeService.getTotalFee(createTotalFeeRequest("Tartu", "Scooter", lookUpTime));
+        totalFeeService.getTotalFee(createTotalFeeRequest(Tartu, scooterId, lookUpTime));
 
     assertNotNull(totalFee);
     assertTrue(totalFee.fee().doubleValue() > 0);
@@ -127,7 +93,7 @@ public class TotalFeeServiceImplTest extends BaseTotalFeeServiceTest {
         new WeatherPhenomenon("glaze"), lookUpTime.minusSeconds(1));
 
     assertThrows(RestrictedConditionException.class, () -> {
-      totalFeeService.getTotalFee(createTotalFeeRequest("Pärnu", "Scooter", lookUpTime));
+      totalFeeService.getTotalFee(createTotalFeeRequest(Parnu, scooterId, lookUpTime));
     }, "Delivery should be forbidden during glaze (slippery conditions).");
   }
 
@@ -139,7 +105,7 @@ public class TotalFeeServiceImplTest extends BaseTotalFeeServiceTest {
         new WeatherPhenomenon("snow"), lookUpTime.minusSeconds(1));
 
     TotalFeeResponse totalFee = totalFeeService.getTotalFee(createTotalFeeRequest(
-        "Tartu", "Bike", lookUpTime
+        Tartu, bikeId, lookUpTime
     ));
     assertThat("Total fee should be 4.0", totalFee.fee().doubleValue() == 4.0);
   }

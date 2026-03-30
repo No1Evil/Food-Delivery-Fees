@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/admin/measurements", headers = "X-API-VERSION=1")
 @RequiredArgsConstructor
-public final class MeasurementController {
+public final class MeasurementAdminController {
 
   private final MeasurementSyncService measurementSyncService;
   private final MeasurementService service;

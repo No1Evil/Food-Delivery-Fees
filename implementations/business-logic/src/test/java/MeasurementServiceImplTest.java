@@ -7,26 +7,22 @@ import global.fujitsu.api.model.dto.request.create.CreateMeasurementRequest;
 import global.fujitsu.api.model.dto.request.get.GetMeasurementRequest;
 import global.fujitsu.api.model.dto.response.get.MeasurementResponse;
 import global.fujitsu.api.model.weather.WeatherPhenomenon;
-import global.fujitsu.domain.mapper.impl.MeasurementMapper;
 import global.fujitsu.domain.service.MeasurementServiceImpl;
-import global.fujitsu.persistence.dao.impl.JdbcMeasurementDao;
 import java.math.BigDecimal;
 import java.time.Instant;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jdbc.test.autoconfigure.JdbcTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.context.jdbc.Sql;
 
-@JdbcTest
-@Sql(scripts = "classpath:sql/scripts/regions_and_vehicles_references.sql")
-@Import({MeasurementServiceImpl.class, MeasurementMapper.class, JdbcMeasurementDao.class})
+@Sql({
+    "classpath:sql/scripts/regions_and_vehicles_references.sql"
+})
 public class MeasurementServiceImplTest extends BaseServiceTest<
     MeasurementServiceImpl, MeasurementResponse, CreateMeasurementRequest> {
 
   @Autowired
-  public MeasurementServiceImplTest(MeasurementServiceImpl service) {
-    super(service);
+  public void init(MeasurementServiceImpl service) {
+    super.setService(service);
   }
 
   @Override
