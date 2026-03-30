@@ -1,4 +1,4 @@
-package global.fujitsu.restapp.controller.admin;
+package global.fujitsu.restapp.controller.client;
 
 import java.time.Instant;
 import java.util.Objects;
