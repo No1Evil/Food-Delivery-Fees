@@ -4,6 +4,7 @@ Navigation
 - [Introduction](#introduction)
 - ***[Fast start](#fast-start)***
 - [Changelogs](docs/CHANGELOG.md)
+- [API guide](/docs/API_GUIDE.md)
 - ***[Project visualization](docs/VISUALIZATION.md)***
 - [Project workflow](docs/WORKFLOW.md)
 - [Authors](#authors)
