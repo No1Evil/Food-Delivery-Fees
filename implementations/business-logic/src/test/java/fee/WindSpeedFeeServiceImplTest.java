@@ -4,16 +4,10 @@ import base.BaseFeeServiceTest;
 import global.fujitsu.api.model.dto.request.create.CreateWindSpeedFeeRequest;
 import global.fujitsu.api.model.dto.request.get.GetWindSpeedFeeRequest;
 import global.fujitsu.api.model.dto.response.get.WindSpeedFeeResponse;
-import global.fujitsu.domain.mapper.impl.WindSpeedFeeMapper;
 import global.fujitsu.domain.service.fee.WindSpeedFeeServiceImpl;
-import global.fujitsu.persistence.dao.impl.fee.JdbcWindSpeedFeeDao;
 import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jdbc.test.autoconfigure.JdbcTest;
-import org.springframework.context.annotation.Import;
 
-@JdbcTest
-@Import({WindSpeedFeeServiceImpl.class, WindSpeedFeeMapper.class, JdbcWindSpeedFeeDao.class})
 public class WindSpeedFeeServiceImplTest
     extends BaseFeeServiceTest<
     WindSpeedFeeServiceImpl,

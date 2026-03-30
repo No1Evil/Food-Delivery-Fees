@@ -10,58 +10,19 @@ import base.BaseTotalFeeServiceTest;
 import global.fujitsu.api.domain.exceptions.RestrictedConditionException;
 import global.fujitsu.api.model.dto.response.get.TotalFeeResponse;
 import global.fujitsu.api.model.weather.WeatherPhenomenon;
-import global.fujitsu.domain.mapper.impl.AirTemperatureFeeMapper;
-import global.fujitsu.domain.mapper.impl.MeasurementMapper;
-import global.fujitsu.domain.mapper.impl.RegionMapper;
-import global.fujitsu.domain.mapper.impl.RegionalBasedFeeMapper;
-import global.fujitsu.domain.mapper.impl.VehicleTypeMapper;
-import global.fujitsu.domain.mapper.impl.WeatherPhenomenonFeeMapper;
-import global.fujitsu.domain.mapper.impl.WindSpeedFeeMapper;
-import global.fujitsu.domain.service.MeasurementServiceImpl;
-import global.fujitsu.domain.service.RegionServiceImpl;
-import global.fujitsu.domain.service.VehicleTypeServiceImpl;
-import global.fujitsu.domain.service.fee.AirTemperatureFeeServiceImpl;
-import global.fujitsu.domain.service.fee.RegionalBasedFeeServiceImpl;
 import global.fujitsu.domain.service.fee.TotalFeeServiceImpl;
-import global.fujitsu.domain.service.fee.WeatherPhenomenonFeeServiceImpl;
-import global.fujitsu.domain.service.fee.WindSpeedFeeServiceImpl;
-import global.fujitsu.persistence.dao.impl.JdbcMeasurementDao;
-import global.fujitsu.persistence.dao.impl.JdbcRegionDao;
-import global.fujitsu.persistence.dao.impl.JdbcVehicleTypeDao;
-import global.fujitsu.persistence.dao.impl.fee.JdbcAirTemperatureFeeDao;
-import global.fujitsu.persistence.dao.impl.fee.JdbcRegionalBasedFeeDao;
-import global.fujitsu.persistence.dao.impl.fee.JdbcWeatherPhenomenonFeeDao;
-import global.fujitsu.persistence.dao.impl.fee.JdbcWindSpeedFeeDao;
-import java.math.BigDecimal;
 import java.time.Instant;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jdbc.test.autoconfigure.JdbcTest;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
-@JdbcTest
-@Import({
-    TotalFeeServiceImpl.class,
-    MeasurementServiceImpl.class, JdbcMeasurementDao.class, MeasurementMapper.class,
-    RegionServiceImpl.class, JdbcRegionDao.class, RegionMapper.class,
-    AirTemperatureFeeServiceImpl.class, JdbcAirTemperatureFeeDao.class,
-    AirTemperatureFeeMapper.class,
-    WeatherPhenomenonFeeServiceImpl.class, JdbcWeatherPhenomenonFeeDao.class,
-    WeatherPhenomenonFeeMapper.class,
-    RegionalBasedFeeServiceImpl.class, JdbcRegionalBasedFeeDao.class, RegionalBasedFeeMapper.class,
-    WindSpeedFeeServiceImpl.class, JdbcWindSpeedFeeDao.class, WindSpeedFeeMapper.class,
-    VehicleTypeServiceImpl.class, JdbcVehicleTypeDao.class, VehicleTypeMapper.class,
-})
-@ContextConfiguration(classes = TotalFeeServiceImplTest.class)
+@Transactional
 public class TotalFeeServiceImplTest extends BaseTotalFeeServiceTest {
 
   @Autowired
   private TotalFeeServiceImpl totalFeeService;
-  @Autowired
-  private MeasurementServiceImpl measurementService;
 
   private final Long Tallinn = 1L;
   private final Long Tartu = 2L;

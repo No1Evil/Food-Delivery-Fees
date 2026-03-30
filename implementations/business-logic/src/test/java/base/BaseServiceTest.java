@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 
+import global.fujitsu.TestApplication;
 import global.fujitsu.api.domain.exceptions.EntityNotFoundException;
 import global.fujitsu.api.domain.exceptions.FeeNotFoundException;
 import global.fujitsu.api.domain.service.base.BaseService;
@@ -12,32 +13,24 @@ import global.fujitsu.api.model.dto.request.base.CreateRequest;
 import global.fujitsu.api.model.dto.response.base.GetResponse;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.jdbc.test.autoconfigure.JdbcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.jdbc.Sql;
+import org.springframework.transaction.annotation.Transactional;
 
-@JdbcTest
-@Sql(scripts = "classpath:schema.sql")
+@SpringBootTest(classes = TestApplication.class)
 @ActiveProfiles("test")
-@ContextConfiguration(classes = BaseServiceTest.TestConfig.class)
-@RequiredArgsConstructor
+@Transactional
 public abstract class BaseServiceTest<
     S extends BaseService<ResponseT, RequestT>,
     ResponseT extends GetResponse,
     RequestT extends CreateRequest> {
 
-  protected final S service;
+  protected S service;
 
-  @Configuration
-  @EnableAutoConfiguration
-  static class TestConfig {}
+  protected void setService(S service) {
+    this.service = service;
+  }
 
   protected abstract RequestT createRequest();
 

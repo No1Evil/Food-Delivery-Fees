@@ -5,17 +5,10 @@ import base.BaseFeeServiceTest;
 import global.fujitsu.api.model.dto.request.create.CreateAirTemperatureFeeRequest;
 import global.fujitsu.api.model.dto.request.get.GetAirTemperatureFeeRequest;
 import global.fujitsu.api.model.dto.response.get.AirTemperatureFeeResponse;
-import global.fujitsu.domain.mapper.impl.AirTemperatureFeeMapper;
 import global.fujitsu.domain.service.fee.AirTemperatureFeeServiceImpl;
-import global.fujitsu.persistence.dao.impl.fee.JdbcAirTemperatureFeeDao;
 import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jdbc.test.autoconfigure.JdbcTest;
-import org.springframework.context.annotation.Import;
 
-@JdbcTest
-@Import({AirTemperatureFeeServiceImpl.class, AirTemperatureFeeMapper.class,
-    JdbcAirTemperatureFeeDao.class})
 public class AirTemperatureFeeServiceImplTest
     extends BaseFeeServiceTest<
     AirTemperatureFeeServiceImpl,
