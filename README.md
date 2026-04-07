@@ -18,13 +18,28 @@ This is a Practice-driven project and this doesn't stay as MVP or Production-rea
 
 ## Tech stack
 <details>
+
 Java 25
 
 Spring boot 4.0.4
 
+Spring security
+
+JWT
+
+Jakarta validations
+
 H2
 
 JDBC
+
+FasterXML Woodstox
+
+JUnit5
+
+Gradle Kotlin DSL
+
+Docker & Docker compose
 
 Docker
 </details>
