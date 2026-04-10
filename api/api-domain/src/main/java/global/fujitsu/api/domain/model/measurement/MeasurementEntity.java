@@ -1,7 +1,7 @@
 package global.fujitsu.api.domain.model.measurement;
 
 import global.fujitsu.api.domain.model.EntityModel;
-import global.fujitsu.api.model.weather.WeatherPhenomenon;
+import global.fujitsu.api.domain.model.weather.WeatherPhenomenon;
 import lombok.NonNull;
 import org.jetbrains.annotations.Nullable;
 

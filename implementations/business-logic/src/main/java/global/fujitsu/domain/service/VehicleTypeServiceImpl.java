@@ -3,7 +3,7 @@ package global.fujitsu.domain.service;
 import global.fujitsu.api.domain.exceptions.EntityNotFoundException;
 import global.fujitsu.api.domain.model.vehicle.VehicleTypeEntity;
 import global.fujitsu.api.domain.service.VehicleTypeService;
-import global.fujitsu.api.model.vehicle.VehicleType;
+import global.fujitsu.api.domain.model.vehicle.VehicleType;
 import global.fujitsu.api.repository.vehicle.VehicleTypeRepository;
 import java.util.List;
 import lombok.NonNull;

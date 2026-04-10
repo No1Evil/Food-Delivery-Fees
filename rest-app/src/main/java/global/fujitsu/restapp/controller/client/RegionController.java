@@ -2,7 +2,7 @@ package global.fujitsu.restapp.controller.client;
 
 import global.fujitsu.api.domain.service.RegionService;
 import global.fujitsu.api.model.dto.response.get.RegionResponse;
-import global.fujitsu.api.model.region.RegionName;
+import global.fujitsu.api.domain.model.region.RegionName;
 import global.fujitsu.restapp.mapper.impl.RegionMapper;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

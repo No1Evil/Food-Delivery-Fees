@@ -1,4 +1,4 @@
-package global.fujitsu.api.model.weather;
+package global.fujitsu.api.domain.model.weather;
 
 /** Weather phenomenon wrapper class. */
 public record WeatherPhenomenon(String value) {

@@ -1,6 +1,5 @@
-package global.fujitsu.api.model.region;
+package global.fujitsu.api.domain.model.region;
 
-import java.util.regex.Pattern;
 import lombok.NonNull;
 
 /**

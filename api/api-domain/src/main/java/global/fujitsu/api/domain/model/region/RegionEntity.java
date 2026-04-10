@@ -1,8 +1,6 @@
 package global.fujitsu.api.domain.model.region;
 
 import global.fujitsu.api.domain.model.EntityModel;
-import global.fujitsu.api.model.region.RegionName;
-import global.fujitsu.api.model.region.WmoCode;
 import lombok.NonNull;
 import org.jetbrains.annotations.Nullable;
 

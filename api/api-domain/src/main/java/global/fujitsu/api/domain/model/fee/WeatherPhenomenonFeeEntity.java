@@ -1,6 +1,6 @@
 package global.fujitsu.api.domain.model.fee;
 
-import global.fujitsu.api.model.weather.WeatherPhenomenon;
+import global.fujitsu.api.domain.model.weather.WeatherPhenomenon;
 import lombok.NonNull;
 import org.jetbrains.annotations.Nullable;
 

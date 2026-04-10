@@ -1,4 +1,4 @@
-package global.fujitsu.api.model.vehicle;
+package global.fujitsu.api.domain.model.vehicle;
 
 import lombok.NonNull;
 

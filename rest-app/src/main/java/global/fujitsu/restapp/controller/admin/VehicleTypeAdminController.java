@@ -3,7 +3,6 @@ package global.fujitsu.restapp.controller.admin;
 import global.fujitsu.api.domain.service.VehicleTypeService;
 import global.fujitsu.api.model.dto.request.create.CreateVehicleTypeRequest;
 import global.fujitsu.api.model.dto.response.get.VehicleTypeResponse;
-import global.fujitsu.api.model.vehicle.VehicleType;
 import global.fujitsu.restapp.mapper.impl.VehicleTypeMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;

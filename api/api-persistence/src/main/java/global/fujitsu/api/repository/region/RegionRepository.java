@@ -1,8 +1,8 @@
 package global.fujitsu.api.repository.region;
 
 import global.fujitsu.api.domain.model.region.RegionEntity;
-import global.fujitsu.api.model.region.RegionName;
-import global.fujitsu.api.model.region.WmoCode;
+import global.fujitsu.api.domain.model.region.RegionName;
+import global.fujitsu.api.domain.model.region.WmoCode;
 import global.fujitsu.api.repository.base.Repository;
 import lombok.NonNull;
 
