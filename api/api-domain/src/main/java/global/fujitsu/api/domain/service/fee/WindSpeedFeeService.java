@@ -1,5 +1,6 @@
 package global.fujitsu.api.domain.service.fee;
 
+import global.fujitsu.api.domain.model.fee.WindSpeedFeeEntity;
 import global.fujitsu.api.domain.service.base.BaseFeeService;
 import global.fujitsu.api.model.dto.request.create.CreateWindSpeedFeeRequest;
 import global.fujitsu.api.model.dto.request.get.GetWindSpeedFeeRequest;
@@ -14,9 +15,6 @@ import java.math.BigDecimal;
 /**
  * Service for wind speed fees.
  */
-public interface WindSpeedFeeService extends BaseFeeService<
-    WindSpeedFeeResponse,
-    CreateWindSpeedFeeRequest,
-    GetWindSpeedFeeRequest> {
+public interface WindSpeedFeeService extends BaseFeeService<WindSpeedFeeEntity, BigDecimal> {
 
 }

@@ -1,14 +1,13 @@
 package fee;
 
 import base.BaseJdbcBasedFeeDaoTest;
-import global.fujitsu.api.entity.model.fee.AirTemperatureFeeEntity;
+import global.fujitsu.api.domain.model.fee.AirTemperatureFeeEntity;
 import global.fujitsu.api.model.dto.request.get.GetAirTemperatureFeeRequest;
 import global.fujitsu.persistence.dao.impl.fee.JdbcAirTemperatureFeeDao;
 import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.test.autoconfigure.JdbcTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.jdbc.Sql;
 
 @JdbcTest
 @Import(JdbcAirTemperatureFeeDao.class)

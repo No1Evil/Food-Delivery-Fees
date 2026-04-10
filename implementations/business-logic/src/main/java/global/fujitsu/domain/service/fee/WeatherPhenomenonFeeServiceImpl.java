@@ -2,19 +2,16 @@ package global.fujitsu.domain.service.fee;
 
 import global.fujitsu.api.domain.exceptions.FeeNotFoundException;
 import global.fujitsu.api.domain.exceptions.RestrictedConditionException;
+import global.fujitsu.api.domain.model.fee.WeatherPhenomenonFeeEntity;
 import global.fujitsu.api.domain.service.fee.WeatherPhenomenonFeeService;
-import global.fujitsu.api.model.dto.request.create.CreateWeatherPhenomenonFeeRequest;
-import global.fujitsu.api.model.dto.request.get.GetWeatherPhenomenonFeeRequest;
-import global.fujitsu.api.model.dto.response.get.WeatherPhenomenonFeeResponse;
 import global.fujitsu.api.model.fee.FeeResult;
+import global.fujitsu.api.model.weather.WeatherPhenomenon;
 import global.fujitsu.api.repository.fee.WeatherPhenomenonFeeRepository;
-import global.fujitsu.domain.mapper.impl.WeatherPhenomenonFeeMapper;
+import java.util.List;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /** {@inheritDoc} */
 @Service
@@ -23,12 +20,10 @@ import java.util.List;
 public class WeatherPhenomenonFeeServiceImpl implements WeatherPhenomenonFeeService {
 
   private final WeatherPhenomenonFeeRepository repository;
-  private final WeatherPhenomenonFeeMapper mapper;
 
   @Override
   @Transactional
-  public Long create(@NonNull CreateWeatherPhenomenonFeeRequest request) {
-    var entity = mapper.toEntity(request);
+  public Long create(@org.jspecify.annotations.NonNull WeatherPhenomenonFeeEntity entity) {
     return repository.save(entity);
   }
 
@@ -39,32 +34,31 @@ public class WeatherPhenomenonFeeServiceImpl implements WeatherPhenomenonFeeServ
   }
 
   @Override
-  public WeatherPhenomenonFeeResponse findById(@NonNull Long id) {
-    var entity = repository.findById(id)
+  public WeatherPhenomenonFeeEntity findById(@NonNull Long id) {
+    return repository.findById(id)
         .orElseThrow(
             () -> new FeeNotFoundException("Weather phenomenon fee, with id {}, not found", id));
-    return mapper.toResponse(entity);
   }
 
   @Override
-  public List<WeatherPhenomenonFeeResponse> findAll() {
-    return repository.findAll().stream().map(mapper::toResponse).toList();
+  public List<WeatherPhenomenonFeeEntity> findAll() {
+    return repository.findAll();
   }
 
   @Override
-  public FeeResult getBaseFee(GetWeatherPhenomenonFeeRequest request) {
-    var feeResult = repository.findBaseFee(request)
+  public FeeResult getBaseFee(Long vehicleTypeId, WeatherPhenomenon condition) {
+    var feeResult = repository.findBaseFee(vehicleTypeId, condition)
         .orElseThrow(() -> new FeeNotFoundException(
             "Weather phenomenon fee for vehicle with id {} and weather phenomenon {} not found",
-            request.vehicleTypeId(),
-            request.weatherPhenomenon()
+            vehicleTypeId,
+            condition
         ));
 
     if (!feeResult.isAllowed()) {
       throw new RestrictedConditionException(
           "The vehicle with id {} is not allowed during weather phenomenon {}",
-          request.vehicleTypeId(),
-          request.weatherPhenomenon()
+          vehicleTypeId,
+          condition
       );
     }
 

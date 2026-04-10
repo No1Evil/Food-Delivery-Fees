@@ -4,6 +4,7 @@ import global.fujitsu.api.domain.service.RegionService;
 import global.fujitsu.api.model.dto.request.create.CreateRegionRequest;
 import global.fujitsu.api.model.dto.response.get.RegionResponse;
 import global.fujitsu.api.model.region.RegionName;
+import global.fujitsu.restapp.mapper.impl.RegionMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,19 +26,20 @@ import org.springframework.web.bind.annotation.RestController;
 public final class RegionAdminController {
 
   private final RegionService service;
+  private final RegionMapper mapper;
 
   /** {@return created region id} */
   @PostMapping
   @Operation(description = "Creates new region")
   public ResponseEntity<Long> createRegion(@Valid @RequestBody CreateRegionRequest req) {
-    return ResponseEntity.ok(service.create(req));
+    return ResponseEntity.ok(service.create(mapper.toEntity(req)));
   }
 
   /** {@return found region} */
   @GetMapping("/{id}")
   @Operation(description = "Finds region by id")
   public ResponseEntity<RegionResponse> findById(@PathVariable Long id) {
-    return ResponseEntity.ok(service.findById(id));
+    return ResponseEntity.ok(mapper.toResponse(service.findById(id)));
   }
 
   /** {@return if region is deleted} */

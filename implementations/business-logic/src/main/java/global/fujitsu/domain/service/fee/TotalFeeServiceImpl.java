@@ -8,16 +8,13 @@ import global.fujitsu.api.domain.service.fee.AirTemperatureFeeService;
 import global.fujitsu.api.domain.service.fee.RegionalBasedFeeService;
 import global.fujitsu.api.domain.service.fee.WeatherPhenomenonFeeService;
 import global.fujitsu.api.domain.service.fee.WindSpeedFeeService;
-import global.fujitsu.api.model.dto.request.get.*;
-import global.fujitsu.api.model.dto.response.get.TotalFeeResponse;
 import global.fujitsu.api.model.fee.FeeResult;
+import java.math.BigDecimal;
 import java.time.Instant;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigDecimal;
 
 /** {@inheritDoc} */
 @Service
@@ -34,32 +31,22 @@ public class TotalFeeServiceImpl implements TotalFeeService {
   private final VehicleTypeService vehicleTypeService;
 
   @Override
-  public TotalFeeResponse getTotalFee(TotalFeeRequest request) {
-    var timestamp = request.timestamp() == null ? Instant.now() : request.timestamp();
-
-    var measurement = measurementService.find(
-        new GetMeasurementRequest(request.regionId(), timestamp)
-    );
-
-    var vehicleTypeId = request.vehicleTypeId();
+  public BigDecimal getTotalFee(Long regionId, Long vehicleTypeId, Instant timestamp) {
+    var measurement = measurementService.find(regionId, timestamp);
 
     return toTotalFeeResponse(
-        airTemperatureFeeService.getBaseFee(
-            new GetAirTemperatureFeeRequest(vehicleTypeId, measurement.airTemperature())),
-        weatherPhenomenonFeeService.getBaseFee(
-            new GetWeatherPhenomenonFeeRequest(vehicleTypeId, measurement.weatherPhenomenon())),
-        regionalBasedFeeService.getBaseFee(
-            new GetRegionalBasedFeeRequest(vehicleTypeId, measurement.regionId())),
-        windSpeedFeeService.getBaseFee(
-            new GetWindSpeedFeeRequest(vehicleTypeId, measurement.windSpeed()))
+        airTemperatureFeeService.getBaseFee(vehicleTypeId, measurement.airTemperature()),
+        weatherPhenomenonFeeService.getBaseFee(vehicleTypeId, measurement.weatherPhenomenon()),
+        regionalBasedFeeService.getBaseFee(vehicleTypeId, regionId),
+        windSpeedFeeService.getBaseFee(vehicleTypeId, measurement.windSpeed())
     );
   }
 
-  private static TotalFeeResponse toTotalFeeResponse(@NonNull FeeResult... results) {
+  private static BigDecimal toTotalFeeResponse(@NonNull FeeResult... results) {
     BigDecimal total = BigDecimal.ZERO;
     for (FeeResult result : results) {
       total = total.add(result.fee());
     }
-    return new TotalFeeResponse(total);
+    return total;
   }
 }

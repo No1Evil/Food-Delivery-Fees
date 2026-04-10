@@ -1,10 +1,11 @@
 package global.fujitsu.persistence.dao.impl.fee;
 
-import global.fujitsu.api.entity.model.fee.AirTemperatureFeeEntity;
+import global.fujitsu.api.domain.model.fee.AirTemperatureFeeEntity;
 import global.fujitsu.api.model.dto.request.get.GetAirTemperatureFeeRequest;
 import global.fujitsu.api.model.fee.FeeResult;
 import global.fujitsu.api.repository.fee.AirTemperatureFeeRepository;
 import global.fujitsu.persistence.dao.base.BaseJdbcFeeBasedDao;
+import java.math.BigDecimal;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -23,7 +24,7 @@ import java.util.Optional;
  */
 @Repository
 public class JdbcAirTemperatureFeeDao
-    extends BaseJdbcFeeBasedDao<AirTemperatureFeeEntity, GetAirTemperatureFeeRequest>
+    extends BaseJdbcFeeBasedDao<AirTemperatureFeeEntity, BigDecimal>
     implements AirTemperatureFeeRepository {
 
   private final String findAirTemperatureFeeQuery;
@@ -45,9 +46,8 @@ public class JdbcAirTemperatureFeeDao
   }
 
   @Override
-  public Optional<FeeResult> findBaseFee(GetAirTemperatureFeeRequest request) {
-    return findBaseFee(findAirTemperatureFeeQuery, request.vehicleTypeId(),
-        request.temperature());
+  public Optional<FeeResult> findBaseFee(Long vehicleTypeId, BigDecimal condition) {
+    return findBaseFee(findAirTemperatureFeeQuery, vehicleTypeId, condition);
   }
 
   @Override

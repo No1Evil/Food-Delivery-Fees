@@ -1,12 +1,10 @@
 package global.fujitsu.domain.service;
 
 import global.fujitsu.api.domain.exceptions.EntityNotFoundException;
+import global.fujitsu.api.domain.model.measurement.MeasurementEntity;
 import global.fujitsu.api.domain.service.MeasurementService;
-import global.fujitsu.api.model.dto.request.create.CreateMeasurementRequest;
-import global.fujitsu.api.model.dto.request.get.GetMeasurementRequest;
-import global.fujitsu.api.model.dto.response.get.MeasurementResponse;
 import global.fujitsu.api.repository.measurement.MeasurementRepository;
-import global.fujitsu.domain.mapper.impl.MeasurementMapper;
+import java.time.Instant;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,12 +18,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MeasurementServiceImpl implements MeasurementService {
 
-  private final MeasurementMapper mapper;
   private final MeasurementRepository repository;
 
   @Override
-  public Long create(@NonNull CreateMeasurementRequest request) {
-    return repository.save(mapper.toEntity(request));
+  public Long create(@org.jspecify.annotations.NonNull MeasurementEntity entity) {
+    return 0L;
   }
 
   @Override
@@ -34,25 +31,22 @@ public class MeasurementServiceImpl implements MeasurementService {
   }
 
   @Override
-  public MeasurementResponse findById(@NonNull Long id) {
-    var entity = repository.findById(id).orElseThrow(
+  public MeasurementEntity findById(@NonNull Long id) {
+    return repository.findById(id).orElseThrow(
         () -> new EntityNotFoundException("Measurement with id {} not found", id)
     );
-    return mapper.toResponse(entity);
   }
 
   @Override
-  public List<MeasurementResponse> findAll() {
-    return repository.findAll().stream().map(mapper::toResponse).toList();
+  public List<MeasurementEntity> findAll() {
+    return repository.findAll();
   }
 
   @Override
-  public MeasurementResponse find(GetMeasurementRequest request) {
-    var entity = repository.find(request)
+  public MeasurementEntity find(Long regionId, Instant timestamp) {
+    return repository.find(regionId, timestamp)
         .orElseThrow(() -> new EntityNotFoundException(
-            "Measurement not found for region {} and timestamp {}", request.regionId(),
-            request.timestamp()
+            "Measurement not found for region {} and timestamp {}", regionId, timestamp
         ));
-    return mapper.toResponse(entity);
   }
 }

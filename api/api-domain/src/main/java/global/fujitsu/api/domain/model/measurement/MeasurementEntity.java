@@ -1,13 +1,11 @@
-package global.fujitsu.api.entity.model.measurement;
+package global.fujitsu.api.domain.model.measurement;
 
-import global.fujitsu.api.entity.model.EntityModel;
+import global.fujitsu.api.domain.model.EntityModel;
 import global.fujitsu.api.model.weather.WeatherPhenomenon;
 import lombok.NonNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.math.BigDecimal;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.Instant;
 
 /**

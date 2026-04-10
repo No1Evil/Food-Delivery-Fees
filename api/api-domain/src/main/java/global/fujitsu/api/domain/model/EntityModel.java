@@ -1,4 +1,4 @@
-package global.fujitsu.api.entity.model;
+package global.fujitsu.api.domain.model;
 
 /**
  * Provides base entity model.

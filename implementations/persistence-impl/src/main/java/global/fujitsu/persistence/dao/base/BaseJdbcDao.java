@@ -1,6 +1,6 @@
 package global.fujitsu.persistence.dao.base;
 
-import global.fujitsu.api.entity.model.EntityModel;
+import global.fujitsu.api.domain.model.EntityModel;
 import global.fujitsu.api.repository.base.Repository;
 import global.fujitsu.persistence.util.SqlConstants;
 import lombok.NonNull;

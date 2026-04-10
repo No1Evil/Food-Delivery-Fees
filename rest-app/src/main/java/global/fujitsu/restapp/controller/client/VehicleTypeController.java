@@ -3,6 +3,7 @@ package global.fujitsu.restapp.controller.client;
 import global.fujitsu.api.domain.service.VehicleTypeService;
 import global.fujitsu.api.model.dto.response.get.VehicleTypeResponse;
 import global.fujitsu.api.model.vehicle.VehicleType;
+import global.fujitsu.restapp.mapper.impl.VehicleTypeMapper;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -21,16 +22,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class VehicleTypeController {
 
   private final VehicleTypeService service;
+  private final VehicleTypeMapper mapper;
 
   /** {@return found vehicle types} */
   @GetMapping
   public ResponseEntity<List<VehicleTypeResponse>> findAll() {
-    return ResponseEntity.ok(service.findAll());
+    return ResponseEntity.ok(service.findAll().stream().map(mapper::toResponse).toList());
   }
 
   /** {@return found vehicle type} */
   @GetMapping("/find")
   public ResponseEntity<VehicleTypeResponse> findByName(@RequestParam String type) {
-    return ResponseEntity.ok(service.findByName(new VehicleType(type)));
+    return ResponseEntity.ok(mapper.toResponse(service.findByName(new VehicleType(type))));
   }
 }

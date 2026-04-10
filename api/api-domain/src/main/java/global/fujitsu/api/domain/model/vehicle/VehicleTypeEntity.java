@@ -1,6 +1,6 @@
-package global.fujitsu.api.entity.model.vehicle;
+package global.fujitsu.api.domain.model.vehicle;
 
-import global.fujitsu.api.entity.model.EntityModel;
+import global.fujitsu.api.domain.model.EntityModel;
 import global.fujitsu.api.model.vehicle.VehicleType;
 import lombok.NonNull;
 import org.jetbrains.annotations.Nullable;

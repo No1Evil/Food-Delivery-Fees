@@ -1,5 +1,6 @@
 package global.fujitsu.api.domain.service;
 
+import global.fujitsu.api.domain.model.vehicle.VehicleTypeEntity;
 import global.fujitsu.api.domain.service.base.BaseService;
 import global.fujitsu.api.model.dto.request.create.CreateVehicleTypeRequest;
 import global.fujitsu.api.model.dto.response.get.VehicleTypeResponse;
@@ -9,10 +10,8 @@ import lombok.NonNull;
 /**
  * Service for vehicle types.
  */
-public interface VehicleTypeService extends BaseService<
-    VehicleTypeResponse,
-    CreateVehicleTypeRequest> {
+public interface VehicleTypeService extends BaseService<VehicleTypeEntity> {
 
   /** {@return found vehicle type} */
-  VehicleTypeResponse findByName(@NonNull VehicleType vehicleType);
+  VehicleTypeEntity findByName(@NonNull VehicleType vehicleType);
 }

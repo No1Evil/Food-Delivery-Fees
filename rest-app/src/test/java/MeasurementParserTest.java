@@ -1,6 +1,7 @@
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import global.fujitsu.api.domain.model.measurement.MeasurementEntity;
 import global.fujitsu.api.model.dto.request.create.CreateMeasurementRequest;
 import global.fujitsu.restapp.domain.parser.MeasurementParser;
 import java.io.InputStream;
@@ -30,7 +31,7 @@ public class MeasurementParserTest {
         "Pärnu", 3L
     );
 
-    List<CreateMeasurementRequest> results;
+    List<MeasurementEntity> results;
 
     try (InputStream inputStream = getClass().getClassLoader()
         .getResourceAsStream("test_measurement.xml")) {

@@ -1,6 +1,6 @@
 package global.fujitsu.persistence.dao.impl;
 
-import global.fujitsu.api.entity.model.measurement.MeasurementEntity;
+import global.fujitsu.api.domain.model.measurement.MeasurementEntity;
 import global.fujitsu.api.model.dto.request.get.GetMeasurementRequest;
 import global.fujitsu.api.repository.measurement.MeasurementRepository;
 import global.fujitsu.persistence.dao.base.BaseJdbcDao;
@@ -56,12 +56,8 @@ public class JdbcMeasurementDao
   }
 
   @Override
-  public Optional<MeasurementEntity> find(@NonNull GetMeasurementRequest request) {
-    var timestamp = request.timestamp() == null
-        ? Timestamp.from(Instant.now())
-        : Timestamp.from(request.timestamp());
-
-    return jdbcTemplate.query(findLatestByRegionIdQuery, mapper, request.regionId(), timestamp)
+  public Optional<MeasurementEntity> find(Long regionId, Instant timestamp) {
+    return jdbcTemplate.query(findLatestByRegionIdQuery, mapper, regionId, timestamp)
         .stream().findFirst();
   }
 }

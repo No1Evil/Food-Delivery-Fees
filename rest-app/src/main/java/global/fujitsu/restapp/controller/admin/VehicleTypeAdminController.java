@@ -4,6 +4,7 @@ import global.fujitsu.api.domain.service.VehicleTypeService;
 import global.fujitsu.api.model.dto.request.create.CreateVehicleTypeRequest;
 import global.fujitsu.api.model.dto.response.get.VehicleTypeResponse;
 import global.fujitsu.api.model.vehicle.VehicleType;
+import global.fujitsu.restapp.mapper.impl.VehicleTypeMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,12 +24,13 @@ import org.springframework.web.bind.annotation.RestController;
 public final class VehicleTypeAdminController {
 
   private final VehicleTypeService service;
+  private final VehicleTypeMapper mapper;
 
   /** {@return created vehicle type id} */
   @PostMapping
   @Operation(description = "Creates new vehicle type")
   public ResponseEntity<Long> createVehicleType(@Valid @RequestBody CreateVehicleTypeRequest req) {
-    return ResponseEntity.ok(service.create(req));
+    return ResponseEntity.ok(service.create(mapper.toEntity(req)));
   }
 
   /** {@return is vehicle type deleted} */
@@ -42,6 +44,6 @@ public final class VehicleTypeAdminController {
   @GetMapping("/{id}")
   @Operation(description = "Finds vehicle by id")
   public ResponseEntity<VehicleTypeResponse> findById(@PathVariable Long id) {
-    return ResponseEntity.ok(service.findById(id));
+    return ResponseEntity.ok(mapper.toResponse(service.findById(id)));
   }
 }

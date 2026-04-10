@@ -1,4 +1,4 @@
-package global.fujitsu.api.entity.model.fee;
+package global.fujitsu.api.domain.model.fee;
 
 import java.math.BigDecimal;
 import lombok.NonNull;

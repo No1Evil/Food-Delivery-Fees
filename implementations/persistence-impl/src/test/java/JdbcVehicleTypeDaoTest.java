@@ -1,5 +1,5 @@
 import base.BaseJdbcDaoTest;
-import global.fujitsu.api.entity.model.vehicle.VehicleTypeEntity;
+import global.fujitsu.api.domain.model.vehicle.VehicleTypeEntity;
 import global.fujitsu.api.model.vehicle.VehicleType;
 import global.fujitsu.persistence.dao.impl.JdbcVehicleTypeDao;
 import org.springframework.beans.factory.annotation.Autowired;

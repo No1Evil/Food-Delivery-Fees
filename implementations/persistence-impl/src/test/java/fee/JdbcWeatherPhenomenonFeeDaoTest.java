@@ -1,7 +1,7 @@
 package fee;
 
 import base.BaseJdbcBasedFeeDaoTest;
-import global.fujitsu.api.entity.model.fee.WeatherPhenomenonFeeEntity;
+import global.fujitsu.api.domain.model.fee.WeatherPhenomenonFeeEntity;
 import global.fujitsu.api.model.dto.request.get.GetWeatherPhenomenonFeeRequest;
 import global.fujitsu.api.model.weather.WeatherPhenomenon;
 import global.fujitsu.persistence.dao.impl.fee.JdbcWeatherPhenomenonFeeDao;
@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.test.autoconfigure.JdbcTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.jdbc.Sql;
 
 @JdbcTest
 @Import(JdbcWeatherPhenomenonFeeDao.class)

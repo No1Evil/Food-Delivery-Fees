@@ -5,6 +5,7 @@ import global.fujitsu.api.model.dto.request.create.CreateRegionalBasedFeeRequest
 import global.fujitsu.api.model.dto.request.get.GetRegionalBasedFeeRequest;
 import global.fujitsu.api.model.dto.response.get.RegionalBasedFeeResponse;
 import global.fujitsu.api.model.fee.FeeResult;
+import global.fujitsu.restapp.mapper.impl.RegionalBasedFeeMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -25,12 +26,13 @@ import org.springframework.web.bind.annotation.RestController;
 public final class RegionalBasedFeeController {
 
   private final RegionalBasedFeeService service;
+  private final RegionalBasedFeeMapper mapper;
 
   /** {@return base fee} */
   @PostMapping("/base-fee")
   @Operation(description = "Finds base fee for specified vehicle and region")
   public ResponseEntity<FeeResult> getBaseFee(@Valid @RequestBody GetRegionalBasedFeeRequest req) {
-    return ResponseEntity.ok(service.getBaseFee(req));
+    return ResponseEntity.ok(service.getBaseFee(req.vehicleTypeId(), req.regionId()));
   }
 
   /** {@return created regional based fee id} */
@@ -38,14 +40,14 @@ public final class RegionalBasedFeeController {
   @Operation(description = "Creates new regional based fee rule")
   public ResponseEntity<Long> create(
       @Valid @RequestBody CreateRegionalBasedFeeRequest req) {
-    return ResponseEntity.ok(service.create(req));
+    return ResponseEntity.ok(service.create(mapper.toEntity(req)));
   }
 
   /** {@return found regional based fee} */
   @GetMapping("/{id}")
   @Operation(description = "Finds regional based fee rule by id")
   public ResponseEntity<RegionalBasedFeeResponse> findById(@PathVariable Long id) {
-    return ResponseEntity.ok(service.findById(id));
+    return ResponseEntity.ok(mapper.toResponse(service.findById(id)));
   }
 
   /** {@return if fee is deleted} */
@@ -59,6 +61,6 @@ public final class RegionalBasedFeeController {
   @GetMapping("/all")
   @Operation(description = "Shows all regional based fee rules")
   public ResponseEntity<List<RegionalBasedFeeResponse>> findAll() {
-    return ResponseEntity.ok(service.findAll());
+    return ResponseEntity.ok(service.findAll().stream().map(mapper::toResponse).toList());
   }
 }

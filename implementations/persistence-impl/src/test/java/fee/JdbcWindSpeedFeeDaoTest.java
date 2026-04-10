@@ -1,14 +1,13 @@
 package fee;
 
 import base.BaseJdbcBasedFeeDaoTest;
-import global.fujitsu.api.entity.model.fee.WindSpeedFeeEntity;
+import global.fujitsu.api.domain.model.fee.WindSpeedFeeEntity;
 import global.fujitsu.api.model.dto.request.get.GetWindSpeedFeeRequest;
 import global.fujitsu.persistence.dao.impl.fee.JdbcWindSpeedFeeDao;
 import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.test.autoconfigure.JdbcTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.jdbc.Sql;
 
 @JdbcTest
 @Import(JdbcWindSpeedFeeDao.class)

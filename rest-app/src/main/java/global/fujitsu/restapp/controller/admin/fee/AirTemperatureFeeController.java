@@ -1,10 +1,12 @@
 package global.fujitsu.restapp.controller.admin.fee;
 
+import global.fujitsu.api.domain.model.fee.AirTemperatureFeeEntity;
 import global.fujitsu.api.domain.service.fee.AirTemperatureFeeService;
 import global.fujitsu.api.model.dto.request.create.CreateAirTemperatureFeeRequest;
 import global.fujitsu.api.model.dto.request.get.GetAirTemperatureFeeRequest;
 import global.fujitsu.api.model.dto.response.get.AirTemperatureFeeResponse;
 import global.fujitsu.api.model.fee.FeeResult;
+import global.fujitsu.restapp.mapper.impl.AirTemperatureFeeMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -25,12 +27,14 @@ import org.springframework.web.bind.annotation.RestController;
 public final class AirTemperatureFeeController {
 
   private final AirTemperatureFeeService service;
+  private final AirTemperatureFeeMapper mapper;
 
   /** {@return base fee} */
   @PostMapping("/base-fee")
   @Operation(description = "Finds base fee for specified vehicle and temperature")
   public ResponseEntity<FeeResult> getBaseFee(@Valid @RequestBody GetAirTemperatureFeeRequest req) {
-    return ResponseEntity.ok(service.getBaseFee(req));
+    FeeResult baseFee = service.getBaseFee(req.vehicleTypeId(), req.temperature());
+    return ResponseEntity.ok(baseFee);
   }
 
   /** {@return created air temperature fee id} */
@@ -38,7 +42,7 @@ public final class AirTemperatureFeeController {
   @Operation(description = "Creates new air temperature fee rule")
   public ResponseEntity<Long> create(
       @Valid @RequestBody CreateAirTemperatureFeeRequest req) {
-    return ResponseEntity.ok(service.create(req));
+    return ResponseEntity.ok(service.create(mapper.toEntity(req)));
   }
 
   /** {@return found air temperature fee} */
@@ -46,7 +50,7 @@ public final class AirTemperatureFeeController {
   @Operation(description = "Finds air temperature fee rule by id")
   public ResponseEntity<AirTemperatureFeeResponse> findById(
       @PathVariable Long id) {
-    return ResponseEntity.ok(service.findById(id));
+    return ResponseEntity.ok(mapper.toResponse(service.findById(id)));
   }
 
   /** {@return if fee is deleted} */
@@ -61,6 +65,6 @@ public final class AirTemperatureFeeController {
   @GetMapping("/all")
   @Operation(description = "Shows all air temperature fee rules")
   public ResponseEntity<List<AirTemperatureFeeResponse>> findAll() {
-    return ResponseEntity.ok(service.findAll());
+    return ResponseEntity.ok(service.findAll().stream().map(mapper::toResponse).toList());
   }
 }

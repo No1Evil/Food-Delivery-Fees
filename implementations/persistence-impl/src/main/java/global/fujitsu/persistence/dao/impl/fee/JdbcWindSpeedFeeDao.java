@@ -1,10 +1,11 @@
 package global.fujitsu.persistence.dao.impl.fee;
 
-import global.fujitsu.api.entity.model.fee.WindSpeedFeeEntity;
+import global.fujitsu.api.domain.model.fee.WindSpeedFeeEntity;
 import global.fujitsu.api.model.dto.request.get.GetWindSpeedFeeRequest;
 import global.fujitsu.api.model.fee.FeeResult;
 import global.fujitsu.api.repository.fee.WindSpeedFeeRepository;
 import global.fujitsu.persistence.dao.base.BaseJdbcFeeBasedDao;
+import java.math.BigDecimal;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -23,7 +24,7 @@ import java.util.Optional;
  */
 @Repository
 public class JdbcWindSpeedFeeDao
-    extends BaseJdbcFeeBasedDao<WindSpeedFeeEntity, GetWindSpeedFeeRequest>
+    extends BaseJdbcFeeBasedDao<WindSpeedFeeEntity, BigDecimal>
     implements WindSpeedFeeRepository {
 
   private final String findWindSpeedFeeQuery;
@@ -45,8 +46,8 @@ public class JdbcWindSpeedFeeDao
   }
 
   @Override
-  public Optional<FeeResult> findBaseFee(GetWindSpeedFeeRequest request) {
-    return findBaseFee(findWindSpeedFeeQuery, request.vehicleTypeId(), request.windSpeed());
+  public Optional<FeeResult> findBaseFee(Long vehicleTypeId, BigDecimal condition) {
+    return findBaseFee(findWindSpeedFeeQuery, vehicleTypeId, condition);
   }
 
   @Override

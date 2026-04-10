@@ -9,6 +9,7 @@ description = "H2 database implementation of api-persistence"
 dependencies {
     implementation(project(":api:api-persistence"))
     implementation(project(":api:api-protocol"))
+    implementation(project(":api:api-domain"))
 
     implementation("org.springframework.boot:spring-boot")
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")

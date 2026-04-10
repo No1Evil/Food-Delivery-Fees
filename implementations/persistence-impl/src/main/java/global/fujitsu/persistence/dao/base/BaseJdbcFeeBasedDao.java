@@ -1,6 +1,6 @@
 package global.fujitsu.persistence.dao.base;
 
-import global.fujitsu.api.entity.model.fee.EntityFeeModel;
+import global.fujitsu.api.domain.model.fee.EntityFeeModel;
 import global.fujitsu.api.model.dto.request.base.GetFeeRequest;
 import global.fujitsu.api.model.fee.FeeResult;
 import global.fujitsu.api.repository.base.FeeRepository;
@@ -20,9 +20,9 @@ import java.util.Optional;
  * @param <E> entity fee model
  * @param <G> get fee request
  */
-public abstract class BaseJdbcFeeBasedDao<E extends EntityFeeModel, G extends GetFeeRequest>
+public abstract class BaseJdbcFeeBasedDao<E extends EntityFeeModel, C>
     extends BaseJdbcDao<E>
-    implements FeeRepository<E, G> {
+    implements FeeRepository<E, C> {
 
   /**
    * @param columnNames columns {@code fee} and {@code is_allowed} are included

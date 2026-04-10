@@ -1,5 +1,6 @@
 package global.fujitsu.restapp.domain.parser;
 
+import global.fujitsu.api.domain.model.measurement.MeasurementEntity;
 import global.fujitsu.api.model.dto.request.create.CreateMeasurementRequest;
 import global.fujitsu.api.model.weather.WeatherPhenomenon;
 import java.io.InputStream;
@@ -17,12 +18,12 @@ import org.springframework.stereotype.Component;
 public class MeasurementParser {
 
   /** {@return list of create measurement request} */
-  public ArrayList<CreateMeasurementRequest> parse(InputStream inputStream,
+  public ArrayList<MeasurementEntity> parse(InputStream inputStream,
       Map<String, Long> allowedRegions) throws Exception {
     XMLInputFactory factory = XMLInputFactory.newFactory();
     XMLStreamReader reader = factory.createXMLStreamReader(inputStream);
 
-    var requests = new ArrayList<CreateMeasurementRequest>();
+    var requests = new ArrayList<MeasurementEntity>();
     Instant observationTime = null;
 
     String regionName = null;
@@ -66,8 +67,8 @@ public class MeasurementParser {
 
         if (regionId != null && observationTime != null && airTemp != null
             && windSpeed != null && phenomenon != null) {
-          requests.add(new CreateMeasurementRequest(
-              regionId, airTemp, windSpeed, phenomenon, observationTime
+          requests.add(new MeasurementEntity(
+              null, regionId, airTemp, windSpeed, phenomenon, observationTime
           ));
         }
         // Reset for next station

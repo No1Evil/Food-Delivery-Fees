@@ -5,6 +5,7 @@ import global.fujitsu.api.model.dto.request.create.CreateWindSpeedFeeRequest;
 import global.fujitsu.api.model.dto.request.get.GetWindSpeedFeeRequest;
 import global.fujitsu.api.model.dto.response.get.WindSpeedFeeResponse;
 import global.fujitsu.api.model.fee.FeeResult;
+import global.fujitsu.restapp.mapper.impl.WindSpeedFeeMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -25,12 +26,13 @@ import org.springframework.web.bind.annotation.RestController;
 public final class WindSpeedFeeController {
 
   private final WindSpeedFeeService service;
+  private final WindSpeedFeeMapper mapper;
 
   /** {@return base fee} */
   @PostMapping("/base-fee")
   @Operation(description = "Finds base fee for specified vehicle and wind speed")
   public ResponseEntity<FeeResult> getBaseFee(@Valid @RequestBody GetWindSpeedFeeRequest req) {
-    return ResponseEntity.ok(service.getBaseFee(req));
+    return ResponseEntity.ok(service.getBaseFee(req.vehicleTypeId(), req.windSpeed()));
   }
 
   /** {@return created region id} */
@@ -38,7 +40,7 @@ public final class WindSpeedFeeController {
   @Operation(description = "Creates new wind speed fee rule")
   public ResponseEntity<Long> create(
       @Valid @RequestBody CreateWindSpeedFeeRequest req) {
-    return ResponseEntity.ok(service.create(req));
+    return ResponseEntity.ok(service.create(mapper.toEntity(req)));
   }
 
   /** {@return found region} */
@@ -46,7 +48,7 @@ public final class WindSpeedFeeController {
   @Operation(description = "Finds wind speed fee rule by id")
   public ResponseEntity<WindSpeedFeeResponse> findById(
       @PathVariable Long id) {
-    return ResponseEntity.ok(service.findById(id));
+    return ResponseEntity.ok(mapper.toResponse(service.findById(id)));
   }
 
   /** {@return if region is deleted} */
@@ -61,6 +63,6 @@ public final class WindSpeedFeeController {
   @GetMapping("/all")
   @Operation(description = "Shows all wind speed fee rules")
   public ResponseEntity<List<WindSpeedFeeResponse>> findAll() {
-    return ResponseEntity.ok(service.findAll());
+    return ResponseEntity.ok(service.findAll().stream().map(mapper::toResponse).toList());
   }
 }

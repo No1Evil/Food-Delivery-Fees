@@ -1,8 +1,9 @@
 package global.fujitsu.persistence.dao.impl.fee;
 
-import global.fujitsu.api.entity.model.fee.RegionalBasedFeeEntity;
+import global.fujitsu.api.domain.model.fee.RegionalBasedFeeEntity;
 import global.fujitsu.api.model.dto.request.get.GetRegionalBasedFeeRequest;
 import global.fujitsu.api.model.fee.FeeResult;
+import global.fujitsu.api.model.region.RegionName;
 import global.fujitsu.api.repository.fee.RegionalBasedFeeRepository;
 import global.fujitsu.persistence.dao.base.BaseJdbcFeeBasedDao;
 import lombok.NonNull;
@@ -23,7 +24,7 @@ import java.util.Optional;
  */
 @Repository
 public class JdbcRegionalBasedFeeDao
-    extends BaseJdbcFeeBasedDao<RegionalBasedFeeEntity, GetRegionalBasedFeeRequest>
+    extends BaseJdbcFeeBasedDao<RegionalBasedFeeEntity, Long>
     implements RegionalBasedFeeRepository {
 
   private final String findRegionalBasedFeeQuery;
@@ -45,8 +46,8 @@ public class JdbcRegionalBasedFeeDao
   }
 
   @Override
-  public Optional<FeeResult> findBaseFee(GetRegionalBasedFeeRequest request) {
-    return findBaseFee(findRegionalBasedFeeQuery, request.regionId(), request.vehicleTypeId());
+  public Optional<FeeResult> findBaseFee(Long vehicleTypeId, Long regionId) {
+    return findBaseFee(findRegionalBasedFeeQuery, regionId, vehicleTypeId);
   }
 
   @Override

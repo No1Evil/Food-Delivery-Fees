@@ -4,6 +4,7 @@ import global.fujitsu.api.domain.service.TotalFeeService;
 import global.fujitsu.api.model.dto.request.get.TotalFeeRequest;
 import global.fujitsu.api.model.dto.response.get.TotalFeeResponse;
 import jakarta.validation.Valid;
+import java.math.BigDecimal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ public final class TotalFeeController {
   /** {@return total fee} */
   @PostMapping("/total")
   public ResponseEntity<TotalFeeResponse> getTotalFee(@Valid @RequestBody TotalFeeRequest req) {
-    return ResponseEntity.ok(service.getTotalFee(req));
+    BigDecimal totalFee = service.getTotalFee(req.regionId(), req.vehicleTypeId(), req.timestamp());
+    return ResponseEntity.ok(new TotalFeeResponse(totalFee));
   }
 }

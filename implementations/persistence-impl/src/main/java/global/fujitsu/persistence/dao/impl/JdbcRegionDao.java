@@ -1,6 +1,6 @@
 package global.fujitsu.persistence.dao.impl;
 
-import global.fujitsu.api.entity.model.region.RegionEntity;
+import global.fujitsu.api.domain.model.region.RegionEntity;
 import global.fujitsu.api.model.region.RegionName;
 import global.fujitsu.api.model.region.WmoCode;
 import global.fujitsu.api.repository.region.RegionRepository;

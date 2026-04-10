@@ -1,6 +1,6 @@
 package global.fujitsu.persistence.dao.impl;
 
-import global.fujitsu.api.entity.model.vehicle.VehicleTypeEntity;
+import global.fujitsu.api.domain.model.vehicle.VehicleTypeEntity;
 import global.fujitsu.api.repository.vehicle.VehicleTypeRepository;
 import global.fujitsu.persistence.dao.base.BaseJdbcDao;
 import global.fujitsu.persistence.util.SqlConstants;

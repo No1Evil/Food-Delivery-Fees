@@ -5,6 +5,7 @@ import global.fujitsu.api.model.dto.request.create.CreateWeatherPhenomenonFeeReq
 import global.fujitsu.api.model.dto.request.get.GetWeatherPhenomenonFeeRequest;
 import global.fujitsu.api.model.dto.response.get.WeatherPhenomenonFeeResponse;
 import global.fujitsu.api.model.fee.FeeResult;
+import global.fujitsu.restapp.mapper.impl.WeatherPhenomenonFeeMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -25,12 +26,13 @@ import org.springframework.web.bind.annotation.RestController;
 public final class WeatherPhenomenonFeeController {
 
   private final WeatherPhenomenonFeeService service;
+  private final WeatherPhenomenonFeeMapper mapper;
 
   /** {@return base fee} */
   @PostMapping("/base-fee")
   @Operation(description = "Finds base fee for specified vehicle and weather phenomenon")
   public ResponseEntity<FeeResult> getBaseFee(@Valid @RequestBody GetWeatherPhenomenonFeeRequest req) {
-    return ResponseEntity.ok(service.getBaseFee(req));
+    return ResponseEntity.ok(service.getBaseFee(req.vehicleTypeId(), req.weatherPhenomenon()));
   }
 
   /** {@return created weather phenomenon fee id} */
@@ -38,7 +40,7 @@ public final class WeatherPhenomenonFeeController {
   @Operation(description = "Creates new weather phenomenon fee rule")
   public ResponseEntity<Long> create(
       @Valid @RequestBody CreateWeatherPhenomenonFeeRequest req) {
-    return ResponseEntity.ok(service.create(req));
+    return ResponseEntity.ok(service.create(mapper.toEntity(req)));
   }
 
   /** {@return found weather phenomenon fee} */
@@ -46,7 +48,7 @@ public final class WeatherPhenomenonFeeController {
   @Operation(description = "Finds weather phenomenon fee rule by id")
   public ResponseEntity<WeatherPhenomenonFeeResponse> findById(
       @PathVariable Long id) {
-    return ResponseEntity.ok(service.findById(id));
+    return ResponseEntity.ok(mapper.toResponse(service.findById(id)));
   }
 
   /** {@return if fee is deleted} */
@@ -61,7 +63,7 @@ public final class WeatherPhenomenonFeeController {
   @GetMapping("/all")
   @Operation(description = "Shows all weather phenomenon fee rules")
   public ResponseEntity<List<WeatherPhenomenonFeeResponse>> findAll() {
-    return ResponseEntity.ok(service.findAll());
+    return ResponseEntity.ok(service.findAll().stream().map(mapper::toResponse).toList());
   }
 
 }

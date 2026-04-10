@@ -2,19 +2,15 @@ package global.fujitsu.domain.service.fee;
 
 import global.fujitsu.api.domain.exceptions.FeeNotFoundException;
 import global.fujitsu.api.domain.exceptions.RestrictedConditionException;
+import global.fujitsu.api.domain.model.fee.RegionalBasedFeeEntity;
 import global.fujitsu.api.domain.service.fee.RegionalBasedFeeService;
-import global.fujitsu.api.model.dto.request.create.CreateRegionalBasedFeeRequest;
-import global.fujitsu.api.model.dto.request.get.GetRegionalBasedFeeRequest;
-import global.fujitsu.api.model.dto.response.get.RegionalBasedFeeResponse;
 import global.fujitsu.api.model.fee.FeeResult;
 import global.fujitsu.api.repository.fee.RegionalBasedFeeRepository;
-import global.fujitsu.domain.mapper.impl.RegionalBasedFeeMapper;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /** {@inheritDoc} */
 @Service
@@ -23,11 +19,10 @@ import java.util.List;
 public class RegionalBasedFeeServiceImpl implements RegionalBasedFeeService {
 
   private final RegionalBasedFeeRepository repository;
-  private final RegionalBasedFeeMapper mapper;
 
   @Override
-  public Long create(@NonNull CreateRegionalBasedFeeRequest request) {
-    return repository.save(mapper.toEntity(request));
+  public Long create(@NonNull RegionalBasedFeeEntity entity) {
+    return repository.save(entity);
   }
 
   @Override
@@ -36,26 +31,25 @@ public class RegionalBasedFeeServiceImpl implements RegionalBasedFeeService {
   }
 
   @Override
-  public RegionalBasedFeeResponse findById(@NonNull Long id) {
-    var entity = repository.findById(id)
+  public RegionalBasedFeeEntity findById(@NonNull Long id) {
+    return repository.findById(id)
         .orElseThrow(
             () -> new FeeNotFoundException("Regional based fee, with id {}, not found", id));
-    return mapper.toResponse(entity);
   }
 
   @Override
-  public List<RegionalBasedFeeResponse> findAll() {
-    return repository.findAll().stream().map(mapper::toResponse).toList();
+  public List<RegionalBasedFeeEntity> findAll() {
+    return repository.findAll();
   }
 
   @Override
-  public FeeResult getBaseFee(GetRegionalBasedFeeRequest request) {
-    var feeResult = repository.findBaseFee(request)
+  public FeeResult getBaseFee(Long vehicleTypeId, Long condition) {
+    var feeResult = repository.findBaseFee(vehicleTypeId, condition)
         .orElseThrow(() -> new FeeNotFoundException("Regional based fee not found"));
 
     if (!feeResult.isAllowed()) {
       throw new RestrictedConditionException("Vehicle {} is restricted in that region",
-          request.vehicleTypeId());
+          vehicleTypeId);
     }
 
     return feeResult;

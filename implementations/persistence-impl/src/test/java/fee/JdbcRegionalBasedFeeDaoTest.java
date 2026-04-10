@@ -1,14 +1,13 @@
 package fee;
 
 import base.BaseJdbcBasedFeeDaoTest;
-import global.fujitsu.api.entity.model.fee.RegionalBasedFeeEntity;
+import global.fujitsu.api.domain.model.fee.RegionalBasedFeeEntity;
 import global.fujitsu.api.model.dto.request.get.GetRegionalBasedFeeRequest;
 import global.fujitsu.persistence.dao.impl.fee.JdbcRegionalBasedFeeDao;
 import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.test.autoconfigure.JdbcTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.jdbc.Sql;
 
 @JdbcTest
 @Import(JdbcRegionalBasedFeeDao.class)

@@ -1,5 +1,6 @@
 package global.fujitsu.restapp.domain.service;
 
+import global.fujitsu.api.domain.model.measurement.MeasurementEntity;
 import global.fujitsu.api.domain.service.MeasurementService;
 import global.fujitsu.api.domain.service.RegionService;
 import global.fujitsu.api.model.dto.request.create.CreateMeasurementRequest;
@@ -43,7 +44,7 @@ public class MeasurementSyncService {
     // Fetching xml and parsing
     if (!regionMap.isEmpty()) {
       restTemplate.execute(url, HttpMethod.GET, null, response -> {
-        ArrayList<CreateMeasurementRequest> requests = null;
+        ArrayList<MeasurementEntity> requests = null;
         try {
           requests = measurementParser.parse(response.getBody(), regionMap);
         } catch (Exception e) {
@@ -64,7 +65,7 @@ public class MeasurementSyncService {
     regionMap.clear();
 
     for (var region : regionService.findAll()) {
-      String regionName = region.regionName().value();
+      String regionName = region.name().value();
       regionMap.put(regionName, region.id());
       log.debug("Inserted region {} with id{}", regionName, region.id());
     }

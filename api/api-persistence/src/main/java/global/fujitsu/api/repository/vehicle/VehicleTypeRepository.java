@@ -1,6 +1,6 @@
 package global.fujitsu.api.repository.vehicle;
 
-import global.fujitsu.api.entity.model.vehicle.VehicleTypeEntity;
+import global.fujitsu.api.domain.model.vehicle.VehicleTypeEntity;
 import global.fujitsu.api.repository.base.Repository;
 import lombok.NonNull;
 

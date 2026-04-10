@@ -1,6 +1,6 @@
 package global.fujitsu.restapp.mapper.impl;
 
-import global.fujitsu.api.entity.model.fee.AirTemperatureFeeEntity;
+import global.fujitsu.api.domain.model.fee.AirTemperatureFeeEntity;
 import global.fujitsu.api.model.dto.request.create.CreateAirTemperatureFeeRequest;
 import global.fujitsu.api.model.dto.response.get.AirTemperatureFeeResponse;
 import global.fujitsu.restapp.mapper.RequestMapper;

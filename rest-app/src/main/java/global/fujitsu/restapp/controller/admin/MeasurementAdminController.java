@@ -5,6 +5,7 @@ import global.fujitsu.api.model.dto.request.create.CreateMeasurementRequest;
 import global.fujitsu.api.model.dto.request.get.GetMeasurementRequest;
 import global.fujitsu.api.model.dto.response.get.MeasurementResponse;
 import global.fujitsu.restapp.domain.service.MeasurementSyncService;
+import global.fujitsu.restapp.mapper.impl.MeasurementMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ public final class MeasurementAdminController {
 
   private final MeasurementSyncService measurementSyncService;
   private final MeasurementService service;
+  private final MeasurementMapper mapper;
 
   /** {@return measurement list or exact by request} */
   @GetMapping
@@ -34,9 +36,9 @@ public final class MeasurementAdminController {
   public ResponseEntity<?> find(
       @Valid @RequestBody(required = false) GetMeasurementRequest request) {
     if (request != null) {
-      return ResponseEntity.ok(service.find(request));
+      return ResponseEntity.ok(mapper.toResponse(service.find(request.regionId(), request.timestamp())));
     }
-    return ResponseEntity.ok(service.findAll());
+    return ResponseEntity.ok(service.findAll().stream().map(mapper::toResponse).toList());
   }
 
   /** Starts the measurement sync task. */
@@ -52,14 +54,14 @@ public final class MeasurementAdminController {
   @Operation(description = "creates new measurement")
   public ResponseEntity<Long> create(
       @Valid @RequestBody CreateMeasurementRequest request) {
-    return ResponseEntity.ok(service.create(request));
+    return ResponseEntity.ok(service.create(mapper.toEntity(request)));
   }
 
   /** {@return found measurement} */
   @GetMapping("/{id}")
   @Operation(description = "Finds measurement by id")
   public ResponseEntity<MeasurementResponse> findById(@PathVariable Long id) {
-    return ResponseEntity.ok(service.findById(id));
+    return ResponseEntity.ok(mapper.toResponse(service.findById(id)));
   }
 
   /** {@return if measurement was deleted} */

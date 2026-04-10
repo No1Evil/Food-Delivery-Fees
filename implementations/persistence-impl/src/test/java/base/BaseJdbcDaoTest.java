@@ -3,7 +3,7 @@ package base;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 
-import global.fujitsu.api.entity.model.EntityModel;
+import global.fujitsu.api.domain.model.EntityModel;
 import global.fujitsu.api.repository.base.Repository;
 import java.util.ArrayList;
 import java.util.List;
