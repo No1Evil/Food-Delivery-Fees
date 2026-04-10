@@ -6,5 +6,4 @@ description = "Business service interfaces"
 
 dependencies {
     implementation(project(":api:api-protocol"))
-    implementation(project(":api:api-persistence"))
 }
